@@ -1,0 +1,20 @@
+{
+  "name": "notebook",
+  "version": "1.0.0",
+  "description": "个人学习博客",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luzhuokun/Notebook.git"
+  },
+  "author": "luzhuokun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luzhuokun/Notebook/issues"
+  },
+  "homepage": "https://github.com/luzhuokun/Notebook#readme"
+}

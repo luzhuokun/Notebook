@@ -32,9 +32,11 @@
   * [mongo](Database/mongo.md)
   * [redis](Database/redis.md)
 
-* 网络架构
+* 计算机网络
+
   * [nginx](Network/nginx.md)
-  * [wireshark](Network/wireshark.md)
+  * [wireshark抓包分析](Network/wireshark.md)
+  * [内网穿透](Network/NATtraverse.md)
   * [未分类](Network/)
 
 * 编程范式与设计模式

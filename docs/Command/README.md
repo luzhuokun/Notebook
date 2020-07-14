@@ -30,3 +30,20 @@ scp test.txt root@107.172.27.254:/home
 scp -r root@107.172.27.254:/home/test ./
 ### 上传目录
 scp -r test root@107.172.27.254:/home
+
+## nrm
+nrm 是一个 npm 源管理器，允许你快速地在 npm源间切换
+
+### 查看可用镜像源
+nrm ls
+
+### 切换镜像源
+nrm use taobao
+
+### 添加镜像源
+nrm add <registry> <url>
+
+### 删除镜像源
+nrm del <registry>
+
+?> [nrm安装与使用](https://www.cnblogs.com/Jimc/p/10280774.html)

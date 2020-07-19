@@ -1,21 +1,21 @@
-# eslint-loader代码质检及webpack打包改进
 
+## 对公司的一次eslint-loader代码质检及webpack打包改进优化
 阅读本文的基础要求
 - 熟悉前端项目webpack打包的基本逻辑
 - 熟悉eslint的rule规则和plugin插件用法
 
 ?> 下面有概念不理解，请自行查阅 [webpack 文档](https://www.webpackjs.com/concepts) 和 [eslint 文档](https://eslint.bootcss.com) 了解。
 
-## 前言背景
+### 前言背景
 
 我们的前端项目使用webpack进行代码的模块化开发，以`webpack.config.js`中`entry`配置的文件路径作为`入口`，后被webpack编译打包至`output`定义的输出路径上面去。其中webpack会根据配置中提供的loader对import或require进来的模块进行预处理操作，在这其中我们的前端项目引入了eslint-loader对代码进行检测，还引入了我们自己定义的一个loader.js（这个文件在项目的根目录）对vue文件进行代码转换工作。
 
-### loader.js做了两件事情
+#### loader.js做了两件事情
 
 1. 对js和vue文件，除eslint自己推荐的recommended规则检查外，我们还做了自己定义特殊的语法检查
 2. 仅对vue文件代码做拆分修正处理，把template标签中的html代码放入`m.__html__`中，用于后续渲染。并且，提取模块中定义的css代码合并到标签上lang定义的文件路径中去，最终只保留js代码交给webpack做下一步工作。
 
-### 整个设计存在以下几个缺点：
+#### 整个设计存在以下几个缺点：
 
 * 在编辑器（如vscode中）安装了eslint插件的情况下，对自定义的规则是没有检查到的，仅经过webpack打包才有所检查
 * 当代码开发中出现不满足规则时，仅提示了哪个文件出错，没有提示代码是哪行哪列出错
@@ -24,12 +24,12 @@
 
 !> 文章中提到的编辑器都是以vscode为准，webstorm、Sublime等编辑器配置，请自行 [百度](http://www.baidu.com/)
 
-### 基于以上出现的问题，对eslint的用法和打包进行优化改进
+#### 基于以上出现的问题，对eslint的用法和打包进行优化改进
 
 - 引入eslint-plugin-vue插件，配合eslint对vue代码在开发阶段以及打包阶段对代码进行检查
 - 运用eslint自定义插件的方式代替loader.js中特殊的代码检查，引入eslint-plugin-gdds这个npm包
 
-#### 对eslint-plugin-gdds包的介绍
+##### 对eslint-plugin-gdds包的介绍
 这个npm包是我在 [npmjs](https://www.npmjs.com) 上的用gdds发布的一个公共的node_module模块包
 
 为什么使用npm包原因：
@@ -41,7 +41,7 @@
 
 !> npm发包细节这里也不讲，可以参照这个例子[手把手教你用npm发布包](https://blog.csdn.net/taoerchun/article/details/82531549)
 
-#### 对于我们的前端项目，改动的文件包括：
+##### 对于我们的前端项目，改动的文件包括：
 1. loader.js
 
   ```js
@@ -98,7 +98,7 @@
     }
   ```
 
-#### 代码出错检查示例
+##### 代码出错检查示例
 
 ![test](../images/test.png)
 
@@ -111,7 +111,7 @@
 
 !> 重庆电信这边的服务器node版本是6，所以还对低于8的node版本做了兼容，打包的时候不经过eslint插件的检查，仅做eslint的recommended检查，虽然有风险，但是出现问题的概率很低，因为在开发阶段就能很明显的发现代码错误并及时纠正了。所以还是建议把服务器版本都升级到8以上，根除这个风险。
 
-## 总结及建议
+### 总结及建议
 
 1. 开发者请使用node8版本以上进行开发，不然eslint包运行起来会报错。
 2. 所有前端开发者的编辑器都应该安装eslint插件并确认开启，按.eslintrc.js中定义的规则规范来进行代码开发
@@ -122,7 +122,7 @@
     }
 ```
 
-## 题外优化
+### 题外优化
 
 对webpack-dev-server的用法进行了改进，解放前端开发时对app-config.js上static_host字段的依赖
 
@@ -150,7 +150,7 @@ devServer: {
 
 这里主要是新增proxy字段，通过代理的方式，后端所有请求都被代理到前端这个服务上面去。并且，在开启前端开发服务的时候，自动跳转到enter地址去，不用自己手敲了
 
-## 遗留问题
+### 遗留问题
 - 活动和专题的代码在开发的时候，如果没有开启编辑器的eslint插件，是发现不了代码存在的缺陷，因此是不是应该把活动和专题的代码开发都经过webpack，这样能提前发现问题
 - 不敢对代码进行UglifyJsPlugin优化，因为有些盒子太烂，压缩后的语法不支持
 - 没有对views中的html文件做eslint检查

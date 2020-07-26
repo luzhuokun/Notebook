@@ -1,6 +1,9 @@
 ## 数组内元素逐一执行同一个异步函数
 [filename](./test.js ':include')
 
+## 不断减速的递归
+[filename](./test1.js ':include')
+
 ## new的使用问题
 ```js
 var a = function(){this.x=111};

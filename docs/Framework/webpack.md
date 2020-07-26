@@ -1,3 +1,11 @@
+['一文掌握Webpack编译流程'](https://blog.csdn.net/React_Community/article/details/107194743)
+
+## 编译过程
+- 初始化配置参数 合并配置文件和shell语句中的参数
+- 开始编译 compiler.run 生成 compilation
+- 编译模块 make阶段 1. 调用各种loaders进行编译，转换成js代码 2. acorn对js代码进行语法分析并收集依赖
+- 输出资源 组装成一个个的chunk文件，调用seal进行封装，这步是可以修改输出内容的最后机会
+- 完成输出 emit阶段，根据配置上的输出路径和文件名，把文件内容写入到文件系统中
 
 ## tapable原理分析
 主要是控制钩子事件的订阅和发布，一个类似Node中的EventEmitter，webpack通过tapable将实现和流程解偶
@@ -65,7 +73,8 @@
   * Hook._runRegisterInterceptors 拦截器
   * Hook._insert 
     - _resetCompilation
-      重置call、callAsync、promise三个函数
+      * 重置call、callAsync、promise三个函数
+      * 在 _resetCompilation 方法内部把 call 方法的值重置成了 _call 方法，这是因为我们执行 call 方法时执行的是编译好的静态脚本，所以如果注册事件回调时不重置成 _call 方法，那么因为惰性函数的缘故，执行的静态脚本就不会包含当前注册的事件回调了
     - 通过options中的before和stage来确定当前tap注册的回调位置，并排序tap放入到taps数组里面
 - ### 触发call
   * 在触发call的时候，是跑的lazyCompileHook函数，这个函数会调用_createCall

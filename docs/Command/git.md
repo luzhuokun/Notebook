@@ -14,3 +14,6 @@ git config [--local|--global|--system] --unset section.key
 
 ### 把代码还原到commit_id的位置
 git reset --hard commit_id(commit_id通过git log查)
+
+### 添加远程仓库
+git remote add example git@github.com:yourUserId/example.git

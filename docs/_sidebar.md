@@ -32,7 +32,7 @@
   * [nginx](Network/nginx.md)
   * [wireshark抓包分析](Network/wireshark.md)
   * [内网穿透](Network/NATtraverse.md)
-  * [未分类](Network/)
+  * [网络相关内容](Network/)
 
 * 编程范式与设计模式
 
@@ -51,6 +51,10 @@
   * [订购对接](Wechat/order.md)
   * [未分类](Wechat/)
 
+* 游戏开发
+  
+  * [egret 白鹭科技引擎](Game/egret.md)
+
 * 工具
 
   * [docsify](Tools/docsify.md)
@@ -58,7 +62,7 @@
 
 * 其他
   * [polyfill](Utils/Polyfill/)
-  * [常见问题](Utils/Faq/)
+  * [常见问题收集](Utils/Faq/)
   * [浏览器细节](Utils/browser.md)
   * [跨域请求](Utils/cross.md)
 

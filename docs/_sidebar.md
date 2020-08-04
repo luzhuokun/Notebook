@@ -1,15 +1,9 @@
 
-* 工具
-
-  * [docsify](Tools/docsify.md)
-  * [markdown](Tools/markdown.md)
-
 * 命令
 
   * [git](Command/git.md)
   * [svn](Command/svn.md)
-  * [tcpdump](Command/tcpdump.md)
-  * [未分类](Command/)
+  * [常用命令](Command/)
 
 * 基础
 
@@ -56,6 +50,11 @@
   * [公众号](Wechat/officialAccount.md)
   * [订购对接](Wechat/order.md)
   * [未分类](Wechat/)
+
+* 工具
+
+  * [docsify](Tools/docsify.md)
+  * [markdown](Tools/markdown.md)
 
 * 其他
   * [polyfill](Utils/Polyfill/)

@@ -1,18 +1,41 @@
 
-## 查看进程信息
-ps  -ef | grep nginx
+## ps 进程状态
 
-## 查看最近100条操作记录
-history 100
+**查看进程信息**  ps -ef | grep nginx
 
-## 查看端口占用
-netstat   -nultp（此处不用加端口号）
 
-## 查看指定端口占用
-netstat  -anp  |grep   端口号
 
-## 放开防火墙步骤
+## kill 杀死进程
 
+**重新加载进程** kill -1 12345  
+**彻底杀死进程** kill -9 12345   
+**正常停止一个进程** kill -15 12345   
+
+
+
+## history 历史操作
+
+**最近100条操作记录**  history 100
+
+
+
+## tcpdump 网络包分析命令
+
+[filename](./tcpdump.md ':include')
+
+
+
+## netstat 网络状态
+
+**所有端口占用**  netstat -nultp
+
+**指定端口占用**  netstat -anp |grep 8080
+
+
+
+## iptables 防火墙
+
+**放开防火墙步骤**  
 1. 查看状态：iptables -L -n
 2. 直接编辑：vim /etc/sysconfig/iptables
 3. 端口开放：-A INPUT -m state --state NEW -m tcp -p tcp --dport 18080 -j ACCEPT
@@ -21,29 +44,36 @@ netstat  -anp  |grep   端口号
 
 ?> 备注：批量开端口 -A INPUT -p tcp -m tcp --dport 18080:18090 -j ACCEPT
 
-## scp
-### 下载文件
-scp root@107.172.27.254:/home/test.txt ./
-### 上传文件
-scp test.txt root@107.172.27.254:/home
-### 下载目录
-scp -r root@107.172.27.254:/home/test ./
-### 上传目录
-scp -r test root@107.172.27.254:/home
 
-## nrm
-nrm 是一个 npm 源管理器，允许你快速地在 npm源间切换
 
-### 查看可用镜像源
-nrm ls
+## scp 远程拷贝
 
-### 切换镜像源
-nrm use taobao
+**下载文件**  scp root@107.172.27.254:/home/test.txt ./  
+**上传文件**  scp test.txt root@107.172.27.254:/home  
+**下载目录**  scp -r root@107.172.27.254:/home/test ./  
+**上传目录**  scp -r test root@107.172.27.254:/home  
 
-### 添加镜像源
-nrm add <registry> <url>
 
-### 删除镜像源
-nrm del <registry>
+
+## nrm npm的镜像源管理工具
+nrm 是一个 npm 源管理器，允许你快速地在 npm源间切换。
+
+**查看可用镜像源**  nrm ls
+
+**切换镜像源**  nrm use taobao
+
+**添加镜像源**  nrm add <registry> <url>
+
+**删除镜像源**  nrm del <registry>
 
 ?> [nrm安装与使用](https://www.cnblogs.com/Jimc/p/10280774.html)
+
+
+
+## crontab 定时任务命令
+
+**编辑定时任务** crontab –e  
+**启动服务** service crond start  
+**关闭服务** service crond stop  
+**重启服务** service crond restart  
+**重新载入配置** service crond reload  

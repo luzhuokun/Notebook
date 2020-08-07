@@ -172,3 +172,17 @@ webpack使用require.ensure将vue页面打包成独立的chunk文件，也可以
 3. webpack 处理好 chunk 文件后，最后会输出 bundle 文件，这个 bundle 文件包含了经过加载和编译的最终源文件，所以它可以直接在浏览器中运行
 
 一般来说一个 chunk 对应一个 bundle，比如上图中的 utils.js -> chunks 1 -> utils.bundle.js；但也有例外，比如说上图中，我就用 MiniCssExtractPlugin 从 chunks 0 中抽离出了 index.bundle.css 文件。
+
+## 利用CommonsChunkPlugin插件做分包优化
+如果module不存在普通chunk引入在，只在异步模块中出现的话，那么会出现一个重复加载公共代码的现象。  
+因此加入如下代码来抽取公共代码  
+```js
+new webpack.optimize.CommonsChunkPlugin({
+      name: 'app',
+      async: 'vendor-async',
+      children: true,
+      minChunks: 3
+    })
+```
+
+!> [参考文献](https://www.jianshu.com/p/8b840a23129b)

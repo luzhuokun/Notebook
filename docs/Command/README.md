@@ -38,7 +38,7 @@
 **放开防火墙步骤**  
 1. 查看状态：iptables -L -n
 2. 直接编辑：vim /etc/sysconfig/iptables
-3. 端口开放：-A INPUT -m state --state NEW -m tcp -p tcp --dport 18080 -j ACCEPT
+3. 端口开放：-A INPUT -m state --state NEW -m tcp -p tcp --dport 18080  -m comment --comment "allow ssh to this host from anywhere" -j ACCEPT
 4. 保存文件：:wq
 5. 重启防火墙：service iptables restart
 

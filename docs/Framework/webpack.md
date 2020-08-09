@@ -174,7 +174,11 @@ webpack使用require.ensure将vue页面打包成独立的chunk文件，也可以
 一般来说一个 chunk 对应一个 bundle，比如上图中的 utils.js -> chunks 1 -> utils.bundle.js；但也有例外，比如说上图中，我就用 MiniCssExtractPlugin 从 chunks 0 中抽离出了 index.bundle.css 文件。
 
 ## 利用CommonsChunkPlugin插件做分包优化
-如果module不存在普通chunk引入在，只在异步模块中出现的话，那么会出现一个重复加载公共代码的现象。  
+当如果module不存在普通chunk引入在，只在异步模块中出现的话，那么会出现一个重复加载公共代码的现象  
+如果在异步模块中，import()或require.ensure()按需加载会立即提取出一个异步chunk出来  
+如果在异步模块中，import或require模块时，webpack不会进行  
+webpack组chunk的时候，不使用CommonsChunkPlugin的话，经静态分析，只会把module都组装到当前的chunk中去，不会分离出单独的chunk，所以就会造成多个chunk之间的公共代码冗余  
+
 因此加入如下代码来抽取公共代码  
 ```js
 new webpack.optimize.CommonsChunkPlugin({
@@ -185,4 +189,10 @@ new webpack.optimize.CommonsChunkPlugin({
     })
 ```
 
+
 !> [参考文献](https://www.jianshu.com/p/8b840a23129b)
+
+## Scope Hoisting
+Scope Hoisting可以让Webpack打包出来的代码文件更小、运行的更快， 它又译作"作用域提升"
+webpack3使用ModuleConcatenationPlugin插件
+https://www.jianshu.com/p/aad010894cf2

@@ -19,6 +19,9 @@ bind_ip=127.0.0.1，这一行注释掉或者是修改成 bind_ip = 0.0.0.0
 port = 27017，这一行为监听端口  
 auth=true，这一行为登陆验证  
 
+### 修复数据
+mongod --repair
+
 ### 重启mongo服务
 service mongod restart
 

@@ -11,7 +11,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\docs/Utils/Polyfill/vue/observer.js"
+            "program": "${workspaceFolder}\\docs/Utils/Polyfill/vue/observer3.js",
+            "console": "integratedTerminal"
         }
     ]
 }

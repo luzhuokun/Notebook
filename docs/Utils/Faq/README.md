@@ -17,7 +17,7 @@ new a.b(); // {y:222}
 https://www.cnblogs.com/merray/p/7918977.html  
 应用层 http、websocket  
 会话层 socket  
-传输层 tcp  
+传输层 tcp  (最重要)
 网络层 ip  
 链路层 以太网 ARP RARP  
 
@@ -44,3 +44,8 @@ vendor.js 默认是把node_modules里require的依赖打包到这个bundle上去
 mainfest.js 在vendor的基础上，将一些异步加载打包进去
 app.js 主要放我们自己写的js代码等
 分离出这些文件，主要是想利用浏览器缓存，node_modules中的代码都不是常变化的话，因此用户在访问的时候，就不需要重新下载他们了。
+
+## 客户端渲染、服务器渲染（SSR）和预渲染（Prerendering）
+- 在前后端分离的背景下，把渲染页面的工作放在前端中进行，如react、vue、angular等主流框架。
+- 服务器渲染就是以前不分离的做法，把渲染页面的工作在后端进行，优势主要在于SEO和更快的内容显示，但是服务器渲染会加重服务器的负载，不过可以采用缓存策略降低负载。
+- 预渲染则是在打包的时候打成多个HTML文件，如果你只是用来改善少数不经常改动的页面，则使用预渲染比服务器渲染更合适。[服务器端渲染 vs 预渲染](https://ssr.vuejs.org/zh/) [vue框架的预渲染实现问题](https://zhuanlan.zhihu.com/p/99318865)

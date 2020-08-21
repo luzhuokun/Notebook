@@ -9,3 +9,16 @@
 
 ## vue源码原理分析-观察者模式
 [filename](../utils/Polyfill/vue/observer.js ':include')
+
+## vue-ssr
+
+### nuxt
+https://zh.nuxtjs.org/guide
+
+### prerender
+prerender-spa-plugin利用了puppeteer的爬取页面的功能。Puppeteer 是 Chrome 开发团队在 2017 年发布的一个 Node.js 包，用来模拟 Chrome 浏览器的运行。
+
+### netlify
+
+## vuepress
+[中文文档](https://www.vuepress.cn/)

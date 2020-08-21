@@ -15,3 +15,9 @@ process.nextTick(node才有) 、Promise 、MutationObserver(浏览器才有) 、
 ?> 参考文献：[详解JavaScript中的Event Loop（事件循环）机制](https://blog.csdn.net/qq_33572444/article/details/79106935?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.compare&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.compare)
 
 当一个宏任务执行完就去完成微任务队列中所有microtask任务
+
+## 遇到的一些语法坑
+
+### 箭头函数
+- this，arguments，super 指向的对象并不是当前函数，而是定义时的函数的this，arguments，super
+[箭头函数的坑](https://www.jianshu.com/p/568ddbc08313)

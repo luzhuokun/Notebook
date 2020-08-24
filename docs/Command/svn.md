@@ -32,3 +32,6 @@ svn propset svn:ignore "logs node_modules" ./
 
 ### 拉出新分支 前旧后新
 svn cp http://121.199.61.174:18080/svn/yunnan/branches/yunnan_new_2018 http://121.199.61.174:18080/svn/yunnan/branches/yunnan_new_2020 -m "拉出一个新版云南电信"
+
+### 递归恢复文件
+svn revert -R xxx

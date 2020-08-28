@@ -22,3 +22,7 @@ prerender-spa-plugin利用了puppeteer的爬取页面的功能。Puppeteer 是 C
 
 ## vuepress
 [中文文档](https://www.vuepress.cn/)
+
+### vuepress的原理分析
+markdown文件通过markdown-loader转换成vue，再通过vue-loader得到最终的html
+[深入浅出 vuepress](https://www.jianshu.com/p/c7b2966f9d3c)

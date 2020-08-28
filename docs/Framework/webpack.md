@@ -196,3 +196,7 @@ new webpack.optimize.CommonsChunkPlugin({
 Scope Hoisting可以让Webpack打包出来的代码文件更小、运行的更快， 它又译作"作用域提升"
 webpack3使用ModuleConcatenationPlugin插件
 https://www.jianshu.com/p/aad010894cf2
+
+## cheap-module-eval-source-map
+使每个模块代码都用eval()执行，并且把source map转换为DataUrl添加到eval中去，当代码执行的时候会生成实际的文件，当开发工具需要断点调试的时候，能直接把断点断在原始的文件中去
+https://www.webpackjs.com/configuration/devtool/#对于开发环境

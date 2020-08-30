@@ -12,16 +12,31 @@ class Observer {
   }
   defineReactive(obj, key, val) {
     const dep = new Dep();
-    Object.defineProperty(obj, key, {
-      get() {
-        dep.depend();
-        return val;
-      },
-      set(newVal) {
-        val = newVal;
-        dep.notify();
-      }
-    });
+    if (Array.isArray(obj[key])) {
+      Object.defineProperty(obj, 'push', {
+        value() {
+          this[this.length] = arguments[0];
+          dep.notify();
+        }
+      })
+      Object.defineProperty(obj, key, {
+        get() {
+          dep.depend();
+          return val;
+        }
+      })
+    } else {
+      Object.defineProperty(obj, key, {
+        get() {
+          dep.depend();
+          return val;
+        },
+        set(newVal) {
+          val = newVal;
+          dep.notify();
+        }
+      });
+    }
   }
 }
 class Watcher {
@@ -77,7 +92,7 @@ const s = new Observer({
 new Watcher(s, 'q', () => {
   return s.a + s.c;
 }, (val) => {
-  console.log('ttt',val);
+  console.log('ttt', val);
 });
 
 console.log(s.q);

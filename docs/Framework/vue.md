@@ -1,6 +1,6 @@
-[vue官方文档](https://react.docschina.org) 
-[vue-cli官方文档](https://cli.vuejs.org) 
-[10分钟快速精通rollup.js打包](https://www.imooc.com/article/264074)
+[vue官方文档](https://react.docschina.org)  
+[vue-cli官方文档](https://cli.vuejs.org)  
+[10分钟快速精通rollup.js打包](https://www.imooc.com/article/264074)  
 
 ## vue-cli2.0和3.0的对比分析
 - `vue create` 是`vue-cli3.x`的初始化方式，目前模板是固定的，模板选项是可以自由配置的，具体配置参考[官方文档](https://cli.vuejs.org/zh/)

@@ -200,3 +200,15 @@ https://www.jianshu.com/p/aad010894cf2
 ## cheap-module-eval-source-map
 使每个模块代码都用eval()执行，并且把source map转换为DataUrl添加到eval中去，当代码执行的时候会生成实际的文件，当开发工具需要断点调试的时候，能直接把断点断在原始的文件中去
 https://www.webpackjs.com/configuration/devtool/#对于开发环境
+
+## Webpack HMR 原理解析
+
+- webpack对文件系统进行watch打包到内存中
+- devServer把文件改变的消息通知给浏览器端
+- 浏览器端中的webpack-dev-server/client接收服务器端传来的hash消息进行缓存
+- webpack/lib/HotModuleReplacement.runtime中调用check检查是否更新，在check过程中调用hotDownloadManifest发起ajax请求，若有更新文件列表，则通过hotDownloadUpdateChunk进行jsonp请求，把模块代码请求下来交给HMR runtime进行下一步处理
+- HotModuleReplacement.runtime对模块进行热更新
+- 调用提前嵌入到业务代码中的HMR中的accept方法，把新替换进来的模块执行一遍
+
+?>watch内存 -> hash消息通信 -> HMR.runtime、HotDownloadManifest、HotDownloadUpdateChunk -> accept  
+  参考文献：https://www.jianshu.com/p/95f5f51e6fc7

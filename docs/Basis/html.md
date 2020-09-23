@@ -5,7 +5,7 @@
 
 ## onload的坑
 
-- document上挂载onload不会触发，window上可以
+- document上挂载onload不会触发，window上才可以
 ```js
   // 正常监听
   window.onload = function (event) {};

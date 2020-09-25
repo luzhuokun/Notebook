@@ -22,8 +22,9 @@ auth=true，这一行为登陆验证
 ### 宕机恢复
 [mongodb日志以及异常关机后的恢复]https://blog.csdn.net/jingmo55/article/details/8818515
 
-### 重启mongo服务
-service mongod restart
+### 启动mongo服务
+mongod -f /etc/mongod.conf  
+不行的话试试 service mongod restart  
 
 ### 导出
 mongoexport -d music_shanxi -c acl_ -o acl_.json

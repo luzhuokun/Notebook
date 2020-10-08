@@ -29,7 +29,7 @@ https://www.cnblogs.com/merray/p/7918977.html
 ## rollup和webpack使用场景分析
 https://www.jianshu.com/p/60070a6d7631
 - rollup多用于js库构造，而webpack更多用于前端工程
-- 如果只是想只想做js代码转换，可以使用rollup
+- 如果只是想对js代码转换，可以使用rollup
 - 如果代码中涉及css、html和复杂的代码拆分合并工作，则用webpack
 
 ## AMD、CMD、ESM和CommonJS
@@ -52,3 +52,33 @@ app.js 主要放我们自己写的js代码等
 
 ## 浏览器渲染流程
 parse html (生成dom和cssdom，合并成render tree) -> javascript -> style (Recalculate Style计算样式)-> layout (重排) -> paint（重渲染） -> composite (Composite Layers 合成图像)
+
+## mvc和mvvm的区别
+- mvc就是在controller中把model的数据赋值给view，view向controller发出动作指令，controller选择model驱动视图更新
+- mvvm就是viewModel实现了数据的双向绑定，view和model不直接通信
+
+## react和vue的比较
+- react需要手动优化组件渲染
+- JSX写法 template模版写法
+- css作用域方面也是通过js来控制，vue中使用style scoped来控制
+- 社区支持 官方支持
+
+## vue响应式原理
+vue通过数据劫持和发布订阅者模式的方法，利用Object.defineProperty劫持data上各个属性上的setter和getter，当数据发生变化时，通知数据依赖的watcher订阅者，触发相应的监听回调
+
+## vue的生命周期
+
+### 每个生命周期的特点
+``beforeCreate`` 数据观测和初始化事件都未开始，data、watcher和methods都还不存在
+``created`` 实例创建之后被调用，该阶段可以访问到data，数据观测相关的东西都存在了，但dom还没有被挂载
+``beforeMount`` dom挂载之前，相关的render函数在这之后首次被执行
+``mounted`` 在挂载完dom之后被调用
+``beforeDestroy`` 实例销毁前调用，实例仍然可用
+``destroyed`` 实例销毁后调用，指令、监听事件、所有子实例都被销毁
+``beforeUpdate`` dom更新之前
+``updated`` dom更新之后
+``activated`` 被keep-alive缓存的组件激活时调用
+``deactivated`` 被keep-alive缓存的组件停用时调用
+
+### 为什么会有生命周期
+让我们可以控制vue实例不同阶段的过程

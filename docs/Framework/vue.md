@@ -3,8 +3,13 @@
 [vue-cli官方文档](https://cli.vuejs.org)  
 [10分钟快速精通rollup.js打包](https://www.imooc.com/article/264074)  
 
-## 一个组件在beforeMount和Mount之间干了什么
+## 组件渲染和更新过程
+[描述组件渲染和更新过程](https://blog.csdn.net/qq_42072086/article/details/108006061)
+[从 Vue 初始化到首次渲染生成 DOM 以及从 Vue 数据修改到页面更新 DOM 的流程](https://blog.csdn.net/Bule_daze/article/details/107905664)
+
+### 一个组件在beforeMount和Mount之间干了什么
 new Watcher -> vm._render(创建虚拟vnode) -> vm._update -> vm.__patch__(比较新旧vnode，diff算法的核心)
+
 
 ## vue-cli2.0和3.0的对比分析
 - `vue create` 是`vue-cli3.x`的初始化方式，目前模板是固定的，模板选项是可以自由配置的，具体配置参考[官方文档](https://cli.vuejs.org/zh/)

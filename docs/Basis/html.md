@@ -15,3 +15,13 @@
   document.addEventListener('load',function(event){});
 ```
 ?>注意：部分事件window和document上都会有，比如DOMContentLoaded
+
+## server send event
+sse利用html5的EventSource实现服务器向浏览器单向地推送消息，除了IE不支持  
+http://www.ruanyifeng.com/blog/2017/05/server-sent_events.html
+
+## html5新特性
+- 语义标签
+- 
+
+!> https://juejin.im/post/6844903829679390728

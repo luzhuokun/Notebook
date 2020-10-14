@@ -21,3 +21,18 @@ process.nextTick(node才有) 、Promise 、MutationObserver(浏览器才有) 、
 ### 箭头函数
 - this，arguments，super 指向的对象并不是当前函数，而是定义时的函数的this，arguments，super
 [箭头函数的坑](https://www.jianshu.com/p/568ddbc08313)
+
+### promise问题
+- promise有三个状态：pending、fulfilled、rejected。当状态变成后两者其中一个时，后面不会再次改变状态
+- promise在内部状态变成fulfilled时才把then中的函数放入微任务队列中等待执行
+
+!>[promise经典题](https://blog.csdn.net/qq_30811721/article/details/106849630)
+
+
+## bind的特性
+- 调用bind时，this指向函数的第一个参数，其余参数作为新函数的参数
+- 当new运算符构造绑定函数时，则忽略第一个参数的值
+- 第一个参数如果是任何原始值都会被转换成object
+- 当第一个参数的值为null或undefined时，执行的作用域指向新函数的this
+
+参考：[Function.prototype.bind()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)

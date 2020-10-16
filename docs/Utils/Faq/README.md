@@ -14,12 +14,15 @@ new a.b(); // {y:222}
 ```
 
 ## websocket、http和tcp的区别
+- 应用层 http、websocket
+- 表示层
+- 会话层 socket  
+- 传输层 tcp  (最重要)
+- 网络层 ip  
+- 数据链路层 以太网 ARP RARP  
+- 物理层
+
 https://www.cnblogs.com/merray/p/7918977.html  
-应用层 http、websocket  
-会话层 socket  
-传输层 tcp  (最重要)
-网络层 ip  
-链路层 以太网 ARP RARP  
 
 ## 前端性能优化
 1. 减少http请求和报文大小

@@ -1,0 +1,17 @@
+
+## 中心扩展法求解子回文串数量
+```js
+const countSubstrings = (s) => {
+    let count = 0
+    for (let i = 0; i < 2 * s.length - 1; i++) {
+        let l = i / 2
+        let r = l + i % 2
+        while (l >= 0 && r < s.length && s.charAt(l) == s.charAt(r)) {
+            --l;
+            ++r;
+            ++count;
+        }
+    }
+    return count
+}
+```

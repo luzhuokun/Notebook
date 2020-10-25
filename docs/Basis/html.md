@@ -18,6 +18,7 @@
 
 ## server send event
 sse利用html5的EventSource实现服务器向浏览器单向地推送消息，除了IE不支持  
+Content-Type: text/event-stream  
 http://www.ruanyifeng.com/blog/2017/05/server-sent_events.html
 
 ## html5新特性

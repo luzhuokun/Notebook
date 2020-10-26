@@ -212,3 +212,9 @@ https://www.webpackjs.com/configuration/devtool/#对于开发环境
 
 ?>watch内存 -> hash消息通信 -> HMR.runtime、HotDownloadManifest、HotDownloadUpdateChunk -> accept  
   参考文献：https://www.jianshu.com/p/95f5f51e6fc7
+
+## webpack打包后生成app、vendor、manifest区别
+vendor.js 默认是把node_modules里require的依赖打包到这个bundle上去
+mainfest.js 在vendor的基础上，将一些异步加载打包进去
+app.js 主要放我们自己写的js代码等
+分离出这些文件，主要是想利用浏览器缓存，node_modules中的代码都不是常变化的话，因此用户在访问的时候，就不需要重新下载他们了。

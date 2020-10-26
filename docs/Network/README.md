@@ -36,3 +36,23 @@ https://baijiahao.baidu.com/s?id=1626222867928553865&wfr=spider&for=pc
 305  请求必须通过代理  
 307  临时重定向 （1.1标准，重定向请求方式不可变）  
 308  永久重定向 （1.1标准，重定向请求方式不可变）  
+
+## OSI模型
+
+OSI model（open system interconnection reference model）
+
+- 应用层 各种应用层协议，包括：http、websocket
+- 表示层 信息的语法语义以及它们的关联，如加密解密、转换翻译、压缩解压等
+- 会话层 不同机器上的用户之间建立及管理会话，如socket通信,socket是为了方便使用更底层协议(如tcp、udp)而存在的一种协议  
+- `传输层` 接受上一层的数据，在必要的时候对数据进行分割并传递给网络层 如：tcp、udp
+- 网络层 控制子网运行，如逻辑编码、分组传输、路由选择，包括：ip  
+- 数据链路层 物理寻址，同时将原始比特流转变为逻辑传输线路，如以太网IEEE标准、ARP、RARP  
+- 物理层 机械、电子、定时接口通信信道上的原始比特流传输
+
+## websocket、http和tcp的区别
+
+- websocket、http是应用层协议，tcp是传输层协议
+- websocket、http都是基于tcp协议来传输数据
+- websocket需先进行一次http协议握手，握手成功后，数据走tcp传输，与http无关了
+
+https://www.cnblogs.com/merray/p/7918977.html  

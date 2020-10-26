@@ -1,3 +1,5 @@
+## 浏览器渲染流程
+parse html (生成dom和cssdom，合并成render tree) -> javascript -> style (Recalculate Style计算样式)-> layout (重排) -> paint（重渲染） -> composite (Composite Layers 合成图像)
 
 ## Memory分析内容泄露
 
@@ -73,3 +75,5 @@ cross site request forgery 跨域请求伪造
 - 设置代理
 
 ?> [浏览器同源及其规避方法](https://www.cnblogs.com/TvvT-kevin/articles/12595350.html)
+
+

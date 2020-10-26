@@ -1,3 +1,14 @@
+
+## 移动端页面适配方案
+
+- meta viewport
+- css3 @media媒体查询
+- 动态rem方案 [flexible布局](http://caibaojian.com/flexible-js.html)
+- vw/vh
+- flex布局
+
+[移动端Web页面适配方案（整理版）](https://www.jianshu.com/p/2c33921d5a68)
+
 ## DOMContentLoaded和Onload的区别
 
 - 当html页面上的DOM加载完成时即触发DOMContentLoaded，不等css、js和图片的全部加载完成，注意：DOMContentLoaded 事件必须等待其所属script之前的样式表加载解析完成才会触发

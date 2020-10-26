@@ -3,6 +3,26 @@
 [vue-cli官方文档](https://cli.vuejs.org)  
 [10分钟快速精通rollup.js打包](https://www.imooc.com/article/264074)  
 
+## vue响应式原理
+vue通过数据劫持和发布订阅者模式，利用Object.defineProperty劫持data上各个属性上的setter和getter，当数据发生变化时，通知数据依赖的watcher订阅者，触发相应的监听回调
+
+## vue的生命周期
+
+### 每个生命周期的特点
+``beforeCreate`` 数据观测和初始化事件都未开始，data、watcher和methods都还不存在
+``created`` 实例创建之后被调用，该阶段可以访问到data，数据观测相关的东西都存在了，但dom还没有被挂载
+``beforeMount`` dom挂载之前，相关的render函数在这之后首次被执行
+``mounted`` 在挂载完dom之后被调用
+``beforeDestroy`` 实例销毁前调用，实例仍然可用
+``destroyed`` 实例销毁后调用，指令、监听事件、所有子实例都被销毁
+``beforeUpdate`` dom更新之前
+``updated`` dom更新之后
+``activated`` 被keep-alive缓存的组件激活时调用
+``deactivated`` 被keep-alive缓存的组件停用时调用
+
+### 为什么会有生命周期
+让我们可以控制vue实例不同阶段的过程
+
 ## 组件渲染和更新过程
 [描述组件渲染和更新过程](https://blog.csdn.net/qq_42072086/article/details/108006061)
 [从 Vue 初始化到首次渲染生成 DOM 以及从 Vue 数据修改到页面更新 DOM 的流程](https://blog.csdn.net/Bule_daze/article/details/107905664)

@@ -60,9 +60,25 @@ prerender-spa-plugin利用了puppeteer的爬取页面的功能。Puppeteer 是 C
 
 ### netlify
 
+
 ## vuepress
 [中文文档](https://www.vuepress.cn/)
 
 ### vuepress的原理分析
 markdown文件通过markdown-loader转换成vue，再通过vue-loader得到最终的html  
 [深入浅出 vuepress](https://www.jianshu.com/p/c7b2966f9d3c)
+
+## rollup
+[官方文档](https://www.rollupjs.com/)
+
+### rollup和webpack使用场景分析
+- rollup多用于js库构造，而webpack更多用于前端工程
+- 如果只是想对js代码转换，可以使用rollup
+- 如果代码中涉及css、html和复杂的代码拆分合并工作，则用webpack
+[rollup和webpack使用场景分析](https://www.jianshu.com/p/60070a6d7631)
+
+## vite
+特点：
+- 快速的冷启动
+- 即时的模块热更新
+- 真正的按需编译

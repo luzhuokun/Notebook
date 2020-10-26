@@ -77,3 +77,51 @@ cross site request forgery 跨域请求伪造
 ?> [浏览器同源及其规避方法](https://www.cnblogs.com/TvvT-kevin/articles/12595350.html)
 
 
+### jsonp
+
+利用script标签没有跨域限制的特性来实现跨域，用户把callback函数名称传递给服务器，服务器接收到请求并把callback和json数据一起传递给页面，页面接收并执行请求得到想要的数据。缺点就是不支持post
+
+### CORS (cross-origin-resource sharing)跨域资源共享
+?> 参考文献：[CORS详解](http://www.ruanyifeng.com/blog/2016/04/cors.html)
+
+access-control-allow-origin: http://api.bob.com  
+access-control-allow-credentials: true  
+access-control-expose-headers: FooBar  
+
+#### 简单请求和非简单请求
+
+- 简单请求必须满足1、方法只能是head、get、post。2、头信息包括Accept、Accept-Language、Content-Language、Content-Type:只限于application/x-www-form-urlencoded、multipart/form-data、text/plain
+- 非简单请求会先发出OPTIONS请求进行预检，满足跨域条件再发送实际请求
+
+!>
+那么怎么理解这些限制呢？
+
+其实，简单请求就是普通 HTML Form 在不依赖脚本的情况下可以发出的请求，比如表单的 method 如果指定为 POST ，可以用 enctype 属性指定用什么方式对表单内容进行编码，合法的值就是前述这三种。
+
+非简单请求就是普通 HTML Form 无法实现的请求。比如 PUT 方法、需要其他的内容编码方式、自定义头之类的。
+
+[CORS 为什么要区分『简单请求』和『预检请求』？](https://blog.csdn.net/qihoo_tech/article/details/100681781)
+
+#### 跨域请求时一般不会带上请求的那个域的cookie，需前后端配合才可以带
+原生写法：
+```js
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "http://xxxx.com/demo/b/index.php", true);
+xhr.withCredentials = true; //支持跨域发送cookies
+xhr.send();
+```
+
+jquery写法：
+```js
+$.ajax({
+     type: "POST",
+     url: "http://xxx.com/api/test",
+     dataType: 'jsonp',
+     xhrFields: {
+          withCredentials: true
+     },
+     crossDomain: true,
+     success:function(){},
+     error:function(){}
+});
+```

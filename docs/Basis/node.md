@@ -1,4 +1,4 @@
-## 事件循环机制
+## node事件循环机制
 node事件循环包含6个阶段：
 - timers阶段：执行已经到期的timer(setTimeout、setInterval)回调
 - I/O callbacks阶段：执行I/O（例如文件、网络）的回调

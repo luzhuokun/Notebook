@@ -1,6 +1,21 @@
 ## 在线AST抽象树生成网站
 https://astexplorer.net/
 
+## 基本数据类型
+
+String、Number、Boolean、Underfind、Null、Symbol
+
+## 引用数据类型
+
+Object、Array、Date、Function、RegExp
+
+## js引擎执行过程的三个阶段：
+- 语法分析
+- 预编译阶段
+- 执行阶段
+
+?>[JS引擎线程的执行过程](https://www.jianshu.com/p/0972f9ed4a8c)
+
 ## 事件循环机制
 从一个主任务开始，当前执行栈执行完毕时会立刻先处理所有微任务队列中的事件，然后再去宏任务队列中取出一个事件。`同一次事件循环中，微任务永远在宏任务之前执行`
 
@@ -30,9 +45,20 @@ process.nextTick(node才有) 、Promise 、MutationObserver(浏览器才有) 、
 
 
 ## bind的特性
+<<<<<<< Updated upstream
 - 调用bind时，this指向函数的第一个参数，其余参数作为新函数的参数
 - 当new运算符构造绑定函数时，则忽略第一个参数的值
 - 第一个参数如果是任何原始值都会被转换成object
 - 当第一个参数的值为null或undefined时，执行的作用域指向新函数的this
 
 参考：[Function.prototype.bind()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+
+## Set和Map的对比
+
+- Set是无重复的有序列表。不能直接对Set排序和访问，可以通过has来访问是有有此值
+- Map是有序的键值对，键可以是任意的数据类型
+- WeakSet和WeakMap都是弱引用，WeakSet中的值和WeakMap中的键只能是对象，当它是某个对象的仅存引用时，也不会屏蔽垃圾回收
+=======
+
+参考：[Function.prototype.bind()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+>>>>>>> Stashed changes

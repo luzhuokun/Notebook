@@ -37,4 +37,38 @@ http://www.ruanyifeng.com/blog/2017/05/server-sent_events.html
 
 !> https://juejin.im/post/6844903829679390728
 
-## BFC布局规则
+## BFC布局
+
+Block formatting context 块级格式化上下文
+
+### BFC定义
+
+BFC是一个独立的布局环境，其中的元素布局不受外界影响，并且在BFC中，块盒与行盒都会垂直地沿着父元素的边框排列。
+
+### BFC内的布局规则
+
+- bfc中的元素垂直布局，块元素占一行、内联元素占一行
+- bfc中的相邻元素的垂直方向的margin会发生重叠
+- bfc中的子元素紧贴父元素内容区的左边
+- bfc不会和float浮动元素重叠
+- bfc会产生隔离容器，bfc内的布局不会影响外面的布局
+- bfc计算高度时会包含浮动元素的高度
+
+### 如何创建BFC
+
+- 根元素
+- float值不为none
+- position值不为static
+- display值为inline-block、table-cell、flex、table-caption、inline-flex
+- overflow的值不为visible
+
+### BFC作用
+
+- 避免margin重叠
+- 自适应两栏布局
+- 清除浮动，解决高度塌陷问题 （推荐父元素使用:after伪类添加clear:both属性）
+- 清除字体环绕
+
+## form
+
+form表单是允许跨域发起请求的，因为表单递交的时候页面是会刷新的，不会把结果返回到页面上，所以浏览器是认为安全的

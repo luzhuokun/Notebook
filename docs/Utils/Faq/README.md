@@ -42,6 +42,11 @@ https://www.cnblogs.com/chenwenhao/p/12153332.html
 - CMD与ADM很类似，不同点在于AMD提前引入模块，CMD可以按需引入模块。
 - ESM在ES6语法标准化后实现了模块功能，其模块功能语法主要包括export和import
 
+## Common和ESM的区别
+- Common输出的内容是浅拷贝的，ESM则是引用的
+- Common在运行阶段加载模块，ESM在解析阶段生成接口并对外输出
+- ESM输出的内容只读，如果输出的内容是变量的话，属性还是可以修改的。
+
 ## webpack打包后生成app、vendor、manifest区别
 vendor.js 默认是把node_modules里require的依赖打包到这个bundle上去
 mainfest.js 在vendor的基础上，将一些异步加载打包进去

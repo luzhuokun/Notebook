@@ -1,4 +1,3 @@
-
 ## 中心扩展法求解子回文串数量
 ```js
 const countSubstrings = (s) => {
@@ -15,3 +14,6 @@ const countSubstrings = (s) => {
     return count
 }
 ```
+
+## 尾递归
+在递归调用时，在整个函数的最后执行并且不在一个表达式内

@@ -37,6 +37,8 @@ https://baijiahao.baidu.com/s?id=1626222867928553865&wfr=spider&for=pc
 307  临时重定向 （1.1标准，重定向请求方式不可变）  
 308  永久重定向 （1.1标准，重定向请求方式不可变）  
 
+!> [HTTP常用状态码详解](https://www.cnblogs.com/xixinhua/p/11013377.html)
+
 ## OSI模型
 
 OSI model（open system interconnection reference model）

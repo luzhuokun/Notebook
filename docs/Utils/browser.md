@@ -50,13 +50,18 @@ cross site request forgery 跨域请求伪造
 攻击者盗用用户的身份执行这个用户权限下的操作  
 在同源策略(同源是指协议、端口、域名相同)下，伪造的B网站只能伪造用户发起请求，但拿不到cookie
 
+### 为什么需要同源策略？
+为了限制不同源之间的相互访问，如果没有同源策略，不同源之间的数据和资源可以随意相互访问的话，就失去了隐私和安全性了。
+
 ### 防御措施
 - referer验证，referer就是告诉服务器这个请求是来源于哪个页面地址的
 - token验证，在用户请求中带上提前随机生成的token给到服务器端验证
 - 设置验证码，在用户操作的过程中设置身份确认的验证码操作，但会影响用户体验
 
 ## cookie
-信息存储到客户端本地中，用于客户端和服务器端的交互，常用于存储session信息
+信息存储到客户端本地中，用于客户端和服务器端的交互，常用于存储用户状态信息
+
+[Cookie的所有属性详解](https://blog.csdn.net/qq_39834073/article/details/107808959)
 
 ### httponly
 当httponly属性设置为true让js无法获取当前的cookie信息,能有效地防止xss攻击
@@ -125,3 +130,12 @@ $.ajax({
      error:function(){}
 });
 ```
+
+## 浏览器缓存（http缓存）
+[http协商缓存VS强缓存](https://www.cnblogs.com/wonyun/p/5524617.html)
+
+
+## 浏览器客户端本地缓存
+- Cookie
+- LocalStorge
+- SessionStorge

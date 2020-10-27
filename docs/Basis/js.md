@@ -28,7 +28,7 @@ Object、Array、Date、Function、RegExp
 ## 继承
 
 ### 原型链继承
-将父类的实例作为子类的原型，把Sub.prototype指向（new Sup 对象）or（通过Object.create(Sup.prototype)）  
+子类原型指向父类实例，把Sub.prototype指向（new Sup 对象）or（通过Object.create(Sup.prototype)）  
 
 ?>
 [继承与原型链](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)  

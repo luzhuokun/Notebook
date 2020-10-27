@@ -132,9 +132,23 @@ $.ajax({
 ```
 
 ## 浏览器缓存（http缓存）
-[http协商缓存VS强缓存](https://www.cnblogs.com/wonyun/p/5524617.html)
 
+- http1.0 `Pragma:no-cache`; http1.1 `Cache-Control:no-cache`
+- http1.0 `Expires`; http1.1 `Cache-Control:max-age`=秒
+- `Cache-Control`优先级高于`Expires`
+- http1.0 `last-modified`资源最后修改时间，`if-modified-since`资源上次的`last-modified`时间; http1.1 `Etag` 校验值 在服务器内的唯一标识。
+- `if-none-match` 当客户端资源过期，资源有`Etage`声明，则把`Etage`赋值给`if-none-match`一起传给服务器,服务器计算当前资源的新`Etag`与`if-none-match`进行比较，没变化返回304，有变化则返回200和资源
+- `Cache-Control/Expires`优先级高于`Last-Modified/Etag`,即当当地副本根据`Cache-Control/Expires`发现还在有效期内，则不会再次发送请求去服务器询问修改时间`Last-Modified`或者实体标识符`Etag`
+- `Etag`弥补`Last-Modified`只能精确到秒的缺陷
+- `Etag`优先级高于`Last-Modified`
+[浏览器缓存机制详解](https://blog.csdn.net/hhthwx/article/details/80152728)
 
+### 强缓存和协商缓存
+强缓存就是直接取客户端本地资源，不与服务器交互；协商缓存则需要与服务器交互再决定取客户端本地资源还是服务器资源
+
+### memory cache 和 disk cache
+由浏览器决定使用哪个cache,策略应该是根据内存使用率  
+[浏览器是根据什么决定「from disk cache」与「from memory cache」](https://www.zhihu.com/question/64201378?sort=created)
 ## 浏览器客户端本地缓存
 - Cookie
 - LocalStorge

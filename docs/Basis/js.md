@@ -36,19 +36,17 @@ Object、Array、Date、Function、RegExp
 `Object.create`定义：创建一个新对象，并把这个新对象的__proto__指向提供过来的对象  
 
 ## 浏览器事件循环机制
-从一个主任务开始，当前执行栈执行完毕时会立刻先处理所有微任务队列中的事件，然后再去宏任务队列中取出一个事件。`同一次事件循环中，微任务永远在宏任务之前执行`
+`主线程`把`同步任务`放到`调用栈`中执行，把不同的`异步任务`分别放入`microtask微任务队列`和`macrotask宏任务队列`中去，待`调用栈`空闲时执行`任务队列`中的事件，先把`microtask微任务队列`里所有的`微任务`执行，然后从`macrotask队列`中取一个`宏任务`执行，执行完后, 取出所有的`microtask`执行，如此重复就是`浏览器事件循环`。  
 
 ### 宏任务（macrotask）
-setTimeOut、setInterval、setImmediate、I/O、各种callback、UI渲染、messageChannel等  
+setTimeOut、setInterval、setImmediate、I/O、各种callback、UI渲染、messageChannel、ajax(XMLHttpRequest)等  
 优先级：主代码块 > setTimeOut/setInterval > postMessage > setImmediate
 
 ### 微任务（microtask）
-process.nextTick(node才有) 、Promise 、MutationObserver(浏览器才有) 、async(实质上也是promise)  
+process.nextTick(node才有) 、Promise 、MutationObserver(浏览器才有) 、async/await(promise的语法糖)  
 优先级：process.nextTick > Promise > MutationOberser
 
 ?> 参考文献：[详解JavaScript中的Event Loop（事件循环）机制](https://blog.csdn.net/qq_33572444/article/details/79106935?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.compare&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.compare)
-
-当一个宏任务执行完就去完成微任务队列中所有microtask任务
 
 ## 遇到的一些语法坑
 

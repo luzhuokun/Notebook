@@ -58,14 +58,6 @@ cross site request forgery 跨域请求伪造
 - token验证，在用户请求中带上提前随机生成的token给到服务器端验证
 - 设置验证码，在用户操作的过程中设置身份确认的验证码操作，但会影响用户体验
 
-## cookie
-信息存储到客户端本地中，用于客户端和服务器端的交互，常用于存储用户状态信息
-
-[Cookie的所有属性详解](https://blog.csdn.net/qq_39834073/article/details/107808959)
-
-### httponly
-当httponly属性设置为true让js无法获取当前的cookie信息,能有效地防止xss攻击
-
 ?>
 [XSS与CSRF区别](https://www.cnblogs.com/twlr/p/12287454.html)
 [xss和csrf区别](https://www.cnblogs.com/itsuibi/p/10752868.html)
@@ -80,7 +72,6 @@ cross site request forgery 跨域请求伪造
 - 设置代理
 
 ?> [浏览器同源及其规避方法](https://www.cnblogs.com/TvvT-kevin/articles/12595350.html)
-
 
 ### jsonp
 
@@ -149,7 +140,43 @@ $.ajax({
 ### memory cache 和 disk cache
 由浏览器决定使用哪个cache,策略应该是根据内存使用率  
 [浏览器是根据什么决定「from disk cache」与「from memory cache」](https://www.zhihu.com/question/64201378?sort=created)
+
 ## 浏览器客户端本地缓存
 - Cookie
 - LocalStorge
 - SessionStorge
+
+### Cookie
+信息存储到客户端本地中，用于客户端和服务器端的交互，常用于存储用户状态信息  
+[Cookie的所有属性详解](https://blog.csdn.net/qq_39834073/article/details/107808959)
+
+#### name和value
+一个键值对，一旦创建name就不能改，name区分大小写
+
+#### Domain
+决定在向该域发起请求时带上cookie，该设置对子域有效。Domain参数必须以点(".")开始。
+
+#### Expires/Max-Age
+两者都是cookie的有效期，Expires指cookie被删的时间戳，Max-Age指有效时间，单位为秒，Max-Age为0则立即失效。两者都不传的话默认为`session`值，这个session值指的是跟随服务器上的session设置的过期时间
+
+#### HttpOnly
+- 当httponly属性设置为true让js无法获取当前的cookie信息,能有效地防止xss攻击。
+- 不允许通过脚本document.cookie去更改这个值，同样这个值在document.cookie中也不可见，但在`发送请求时依旧会携带此Cookie`。
+
+#### SameSite
+用来防止 CSRF 攻击和用户追踪  
+可设值：  
+- Strict
+- Lax
+- None
+
+### sessionStorage和localStorage
+- sessionStorage就是从标签页打开到标签页关闭的这段时间里面有效，即当前会话有效
+- localStorage则是永久保存到客户端的硬盘上，需手动清除
+- 大小一般都是5M
+- 对数据的操作有相应的API接口，不需要像cookie要自己封装setCookie和getCookie
+
+解决以下问题：  
+- 大小：cookie被限制为4K
+- 带宽：cookie会随着请求一起发送
+- 易用性

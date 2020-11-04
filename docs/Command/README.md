@@ -31,6 +31,8 @@
 
 **指定端口占用**  netstat -anp |grep 8080
 
+## nslookup 查询域名解析
+nslookup domain [114.114.114.114] // 如果没有指定dns服务器，就采用系统默认的dns服务器，8.8.8.8是谷歌提供的DNS服务器  
 
 
 ## iptables 防火墙

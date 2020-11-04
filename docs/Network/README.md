@@ -65,3 +65,23 @@ OSI model（open system interconnection reference model）
 - websocket需先进行一次http协议握手，握手成功后，数据走tcp传输，与http无关了
 
 https://www.cnblogs.com/merray/p/7918977.html  
+
+## dns
+Domain Name System 域名系统  
+通过域名解析找到服务器对应的IP，域名便于用户记忆
+
+### 欺骗手段
+
+- 域名管理系统被黑
+- 缓存感染，往DNS缓存服务器上放虚假信息
+- DNS信息挟持，攻击者比DNS服务器更快的速度响应用户请求，或者是伪造大量的数据响应包淹没真实的响应数据
+- DNS重定向挟持
+
+### 防范手段
+
+- 直接使用IP访问
+- 尽量使用加密协议通信
+- 足够的带宽，防止被洪流攻击
+
+!?>
+[DNS常见攻击与防范](https://www.williamlong.info/archives/3813.html)

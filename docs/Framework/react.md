@@ -15,3 +15,18 @@
 - 16加入了工作循环、优先级策略
 
 [React 15的diff和React16的区别](https://blog.csdn.net/halations/article/details/109284050)
+
+## hooks钩子理解
+- `特点`：增强副效应中代码的可复用性、使函数组件有状态
+- 钩子（hook）就是 React 函数组件的副效应解决方案，用来为函数组件引入副效应  
+[轻松学会 React 钩子：以 useEffect() 为例](http://www.ruanyifeng.com/blog/2020/09/react-hooks-useeffect-tutorial.html)
+[关于React中useEffect以及Hooks的思考](https://www.jianshu.com/p/101ce42b8800)
+
+## showComponentUpdate
+凡是调用setState都会触发render，即使state没有改变，为了避免性能上的浪费，React 提供了一个 `shouldComponentUpdate` 来控制触发 vdom re-render 逻辑的条件  
+
+## immutable.js
+- 保持原有的数据结构不变
+- 生成不被改变的数据，优于深拷贝
+
+!>[immutable详解](https://www.jianshu.com/p/e839d5b9f7cc)

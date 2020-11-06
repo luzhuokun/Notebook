@@ -18,6 +18,11 @@ new a.b(); // {y:222}
 2. 设置http缓存、本地缓存和长连接
 3. 优化代码（闭包要注意消耗对象和减少dom操作）
 
+## 编码、摘要和加密的区别
+- 编码 Ascoll Unicode Base64
+- 摘要（不可逆加密） 生成哈希值 MD5 SHA
+- 加密（对称、非对称）`对称` DES AES `非对称` RSC
+
 ## AMD、CMD、ESM和CommonJS
 https://www.cnblogs.com/chenwenhao/p/12153332.html
 - CommonJS规范主要应用于nodejs，四个重要的环境变量为module、exports、require、global。exports只是module.exports的全局引用，实际使用时，用module.exports定义当前模块对外输出的接口（不推荐直接用exports）

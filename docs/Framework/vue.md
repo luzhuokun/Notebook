@@ -50,6 +50,11 @@ https://www.jianshu.com/p/743166a8968c
 ## vue源码原理分析-vnode
 https://mp.weixin.qq.com/s?__biz=MzUxNjQ1NjMwNw==&mid=2247484284&idx=1&sn=4b576e3c24a3a695221aaec6179fae84&chksm=f9a66960ced1e076d6bcb7d9450922ab9d232bc93f141b7756d0e8f1fd240a664c4f7453c17d&token=681836850&lang=zh_CN&scene=21#wechat_redirect
 
+## vue的diff算法核心
+- 递归地比较同层级的vnode，不会跨层级比较
+- 新的vnode和旧的vnode比较，如有变化通过patch方法直接给真实dom补丁
+`todo`
+
 ## vue-ssr
 本指南专注于，使用 Node.js server 的服务器端单页面应用程序渲染  
 [vue ssr 指南](https://ssr.vuejs.org/zh/)

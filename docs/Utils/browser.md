@@ -194,3 +194,13 @@ $.ajax({
 - `requestIdleCallback` 浏览器空闲时执行，有可能浏览器一直忙碌而导致该方法很晚才执行，所有可以设置timeout超时时间执行，尚未通过超时毫秒数调用回调，那么回调会在下一次空闲时期被强制执行
 
 [requestIdleCallback和requestAnimationFrame详解](https://www.jianshu.com/p/2771cb695c81)
+
+## SourceMap
+
+- sourceMap文件存储着压缩代码前每一行的位置信息
+- sourceMap就是解决对`压缩`、`合并`后的代码，debug调试时能找到对应的报错位置
+- Chrome谷歌浏览器根据这个sourceMap重现压缩前的代码
+- 启动sourceMap则是代码尾部补上一个注释 `//# sourceMappingURL=map文件地址`
+!> `VLQ码`非常精简地表示很大的数值, 算法大概就是把字母变成二进制，然后借用base64的码表进行转码
+
+[JavaScript Source Map 详解](http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html)

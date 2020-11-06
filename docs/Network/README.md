@@ -59,12 +59,40 @@ OSI model（open system interconnection reference model）
 - 物理层 机械、电子、定时接口通信信道上的原始比特流传输
 
 ## websocket、http和tcp的区别
-
 - websocket、http是应用层协议，tcp是传输层协议
 - websocket、http都是基于tcp协议来传输数据
 - websocket需先进行一次http协议握手，握手成功后，数据走tcp传输，与http无关了
 
 https://www.cnblogs.com/merray/p/7918977.html  
+
+## tcp和udp的区别
+- tcp面向连接，通信前需要三次握手，udp不需要
+- tcp传输可靠，有序，丢包重传，UPD不可靠
+- tcp提供拥塞控制和流量控制机制；udp不提供
+- tcp面向字节流传输，会把信息分割后重组，udp面向数据报，没有分组开销
+- tcp更适合数据的完整性和准确性如文件传输、邮件等；udp更适合实时性要求比较高如视频通话、实时游戏等
+
+## 短轮循、长轮循、SSE和Websocket
+
+- `短轮循`每隔一段时间发送http请求到服务器，服务器不管有没数据更新都直接响应回去
+- `长轮循`每隔一段时间发送http请求到服务器，服务器判断有数据更新就响应，没有则暂时挂起请求
+- `SSE`利用html5新特性EventSource从服务器给客户端发送消息
+- `websocket`在客户端和服务器实现真正的双向通信
+
+!>
+[WEB通讯技术](https://blog.csdn.net/myphp2012/article/details/78437462)  
+[WebSocket 教程](http://www.ruanyifeng.com/blog/2017/05/websocket.html)
+[socket.io库](https://socket.io/)  
+
+## http1.0、http1.1和http2.0
+
+- `http1.0`主要问题有`连接无法复用`(会导致每次请求都经历三次握手和慢启动)和`队头阻塞`(带宽无法被充分利用)
+- `http1.0`设置`Connection:Keep-Alive`在一段时间内复用tcp连接
+- `http1.1`http pipelining并发请求共用一个tcp连接解决`队头阻塞`问题，但存在不少缺陷。只有get、head请求能行，启动条件麻烦
+- `http2.0`主要改动`新的二进制格式`、`连接共享`、`优先级控制`、`header压缩`、`服务器推送`，参考了Google的SPDY协议(基于TCP的会话层协议)
+
+!>
+[HTTP/2 相比 1.0 有哪些重大改进？](https://www.zhihu.com/question/34074946)
 
 ## dns
 Domain Name System 域名系统  

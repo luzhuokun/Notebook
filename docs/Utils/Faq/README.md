@@ -14,9 +14,15 @@ new a.b(); // {y:222}
 ```
 
 ## 前端性能优化
-1. 减少http请求和报文大小
-2. 设置http缓存、本地缓存和长连接
-3. 优化代码（闭包要注意消耗对象和减少dom操作）
+- 页面请求优化
+  1. 减少http请求 设置http缓存、本地缓存和长连接
+  2. 减少报文大小 压缩
+  3. 使用cookie或localstorage存储
+- 代码优化
+  1. 减少dom操作
+  2. 
+
+!>[前端性能优化方案](https://www.cnblogs.com/coober/p/8078847.html)
 
 ## 编码、摘要和加密的区别
 - 编码 Ascoll Unicode Base64

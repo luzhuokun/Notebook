@@ -189,7 +189,6 @@ new webpack.optimize.CommonsChunkPlugin({
     })
 ```
 
-
 !> [参考文献](https://www.jianshu.com/p/8b840a23129b)
 
 ## Scope Hoisting
@@ -218,3 +217,13 @@ vendor.js 默认是把node_modules里require的依赖打包到这个bundle上去
 mainfest.js 在vendor的基础上，将一些异步加载打包进去
 app.js 主要放我们自己写的js代码等
 分离出这些文件，主要是想利用浏览器缓存，node_modules中的代码都不是常变化的话，因此用户在访问的时候，就不需要重新下载他们了。
+
+## 优化
+- 使用`webpack-bundle-analyzer`分析
+- 模块异步加载
+- 第三方库按需引入，这样webpack可以做静态分析tree-sharking，把没用到的代码不打包
+- 抽取模块中公共代码，折腾CommonsChunkPlugin配置
+- 使用compression-webpack-plugin做gzip代码压缩,需要浏览器的支持
+- css代码如果不大可以不分离，不然会浪费时间在请求上面
+
+[首屏性能优化](https://segmentfault.com/a/1190000019499007)

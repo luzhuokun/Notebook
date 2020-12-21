@@ -55,3 +55,6 @@ https://www.cnblogs.com/chenwenhao/p/12153332.html
 - JSX写法 template模版写法
 - css作用域方面也是通过js来控制，vue中使用style scoped来控制
 - 社区支持 官方支持
+
+## 箭头函数和babel造成的this调试问题
+https://juejin.cn/post/6844904114074173448

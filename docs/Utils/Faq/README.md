@@ -58,3 +58,6 @@ https://www.cnblogs.com/chenwenhao/p/12153332.html
 
 ## 箭头函数和babel造成的this调试问题
 https://juejin.cn/post/6844904114074173448
+
+## 记一个element-ui中v-for与el-dialog一起使用的问题
+当el-dialog设置了append-to-body属性时，dialog会被挂载到最外面的body元素上面去，导致其上方的v-for元素动态增加元素时会加不上去，因为vue框架的核心是在insert元素的时候是会找下一个元素进行insertBefore操作的。dialog被挂到body上后就找不到他的parentNode了，就动态给v-for的元素加东西是加不上去了。

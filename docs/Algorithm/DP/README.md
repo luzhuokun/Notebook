@@ -11,7 +11,7 @@
 - 最优子结构
 
 # 斐波那契
-![fibonacci](./fibonacci.png)
+![fibonacci](./fibonacci.ipg)
 
 ## 爬楼梯
 ```js

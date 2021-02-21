@@ -3,7 +3,7 @@
 
 - 将原问题转发为子问题
 - 确定状态
-- 确定边界
+- 确定边界（base case）
 - 确定状态转移方程
 
 特点
@@ -11,7 +11,7 @@
 - 最优子结构
 
 # 斐波那契
-![fibonacci](./fibonacci.ipg)
+![fibonacci](./fibonacci.jpg)
 
 ## 爬楼梯
 ```js
@@ -25,5 +25,5 @@ var climbStairs = function (n) {
   return dp[2]
 }
 ```
-华为面试变种题：增加一个不能连续跳两次的条件
+华为面试变种题：增加一个不能连续跳两步的条件
 推导出f(n) = f(n-1)+f(n-3)

@@ -73,8 +73,21 @@ cross site request forgery 跨域请求伪造
 
 ?> [浏览器同源及其规避方法](https://www.cnblogs.com/TvvT-kevin/articles/12595350.html)
 
-### jsonp
+### 同源页面间的跨页面通信
+- broadcastChannel，用于广播的通信频道，只要各个页面初始相同的频道标识就能相互通信
+- serviceWorker，一个可以长期运行在后台的worker
+- localstorage，当setItem发生变化时（要值真的改变）会触发storage监听事件
+- window.open+window.opener
 
+### 非同源页面间跨页面通信
+-  iframe 与父页面间可以通过指定origin来忽略同源限制，以这个iframe页面做为"桥"嵌入到每个页面中去,交互的逻辑都在这个iframe里面
+
+### iframe跨域请求
+- iframe可以利用window.postmessage、messageChannel、broadcastChanel进行页面和iframe之间通信
+- iframe同域时可以直接访问iframe.contentwindow.document.cookie（除了设置httponly），不同域则访问不到cookie
+- 在跨域的情况下window.parent.postMessage是可以正常访问并调用的，window.parent也可以在子页面上调用，但是把window.parent打印出来就报错了,反之打印iframe.contentwindow也不行，postmessage则可以
+
+### jsonp
 利用script标签没有跨域限制的特性来实现跨域，用户把callback函数名称传递给服务器，服务器接收到请求并把callback和json数据一起传递给页面，页面接收并执行请求得到想要的数据。缺点就是不支持post
 
 ### CORS (cross-origin-resource sharing)跨域资源共享
@@ -98,7 +111,7 @@ access-control-expose-headers: FooBar
 
 [CORS 为什么要区分『简单请求』和『预检请求』？](https://blog.csdn.net/qihoo_tech/article/details/100681781)
 
-#### 跨域请求时一般不会带上请求的那个域的cookie，需前后端配合才可以带
+#### 跨域请求后端接口时一般不会带上请求的那个域的cookie，需前后端配合才可以带
 原生写法：
 ```js
 var xhr = new XMLHttpRequest();
@@ -171,9 +184,11 @@ $.ajax({
 - None
 
 ### sessionStorage和localStorage
-- sessionStorage就是从标签页打开到标签页关闭的这段时间里面有效，即当前会话有效
+- localStorage只适用于同源页面上
 - localStorage则是永久保存到客户端的硬盘上，需手动清除
-- 大小一般都是5M
+- sessionStorage就是从标签页打开到标签页关闭的这段时间里面有效，即当前会话有效
+- sessionStorge适合在打开一个标签页后，用户浏览一组页面期间使用，关闭窗口后数据就可以丢弃了
+- 两者大小一般都是5M
 - 对数据的操作有相应的API接口，不需要像cookie要自己封装setCookie和getCookie
 
 解决以下问题：  

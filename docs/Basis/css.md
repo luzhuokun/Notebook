@@ -91,5 +91,10 @@
 ## 基础问题
 [50道CSS基础面试问题](https://www.cnblogs.com/ZJTL/p/12591471.html)
 
+### querySelectorAll和getElementBy之间的差别
+- querySelectorAll获取的nodelist是静态的
+- getElementBy获取的nodelist是动态的，在Chrome中叫HTMLCollecton
+
+
 ### 设置元素浮动，元素的display变成什么
 display:block（触发了BFC后，display都会变成block）

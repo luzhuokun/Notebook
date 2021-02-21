@@ -10,7 +10,6 @@
 
 [移动端Web页面适配方案（整理版）](https://www.jianshu.com/p/2c33921d5a68)
 
-
 ## First Paint、DOMContentLoaded和Onload的区别
 
 - `First Paint`是指html中第一个script执行之前dom的渲染和cssom的构建情况

@@ -82,8 +82,10 @@
 
 ## 双翼布局和圣杯布局
 
-[filename](./code/圣杯布局.html ':include')
-[filename](./code/双翼布局.html ':include')
+[filename](./code/圣杯布局.html ':include :type=code')
+[filename](./code/双翼布局.html ':include :type=code')
+
+- 双翼用在content中新增一个div，调整这个div的padding值来 代替 圣杯用position:relative和left调整位置
 
 !>
 [圣杯布局和双飞翼布局的作用和区别](https://www.cnblogs.com/woodk/p/5147085.html)

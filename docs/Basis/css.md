@@ -71,6 +71,23 @@
   - flex-end
   - center
 
+[Flex 布局教程：语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+
+## grid响应式布局
+[快速使用CSS Grid布局，实现响应式设计](https://www.cnblogs.com/moqiutao/p/8682142.html)
+
+## 双翼布局和圣杯布局
+
+[filename](./code/圣杯布局.html ':include :type=code')
+
+[filename](./code/双翼布局.html ':include :type=code')
+
+- 核心的代码：.content{width:100%;} .left{margin-left:-100%} .right{margin-right:-rightwidth}
+- 双翼用在content中新增一个div，调整这个div的padding值来 代替 圣杯用position:relative和left调整定位位置
+
+!>
+[圣杯布局和双飞翼布局的作用和区别](https://www.cnblogs.com/woodk/p/5147085.html)
+
 ## CSS权重优先级
 
 - !important > 行内样式 > id > class、伪类和属性选择器 > 标签和伪元素 >通配符
@@ -79,16 +96,6 @@
 - 都使用!impotant，看权重
 - 样式指向同元素，看权重，权重相同看就近原则
 - 样式指向不同元素，就近原则
-
-## 双翼布局和圣杯布局
-
-[filename](./code/圣杯布局.html ':include :type=code')
-[filename](./code/双翼布局.html ':include :type=code')
-
-- 双翼用在content中新增一个div，调整这个div的padding值来 代替 圣杯用position:relative和left调整位置
-
-!>
-[圣杯布局和双飞翼布局的作用和区别](https://www.cnblogs.com/woodk/p/5147085.html)
 
 ## 基础问题
 [50道CSS基础面试问题](https://www.cnblogs.com/ZJTL/p/12591471.html)

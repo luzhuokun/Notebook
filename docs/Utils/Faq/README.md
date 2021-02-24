@@ -4,19 +4,19 @@
 
 ## 排序
 ### 快速排序
-[filename](./quickSort.js ':include')
+[filename](./code/quickSort.js ':include')
 
 ### 归并排序
-[filename](./mergeSort.js ':include')
+[filename](./code/mergeSort.js ':include')
 
 ### 冒泡排序
-[filename](./bubble.js ':include')
+[filename](./code/bubble.js ':include')
 
 ### 选择排序
-[filename](./selectSort.js ':include')
+[filename](./code/selectSort.js ':include')
 
 ### 插入排序
-[filename](./insertSort.js ':include')
+[filename](./code/insertSort.js ':include')
 
 ## 数组内元素逐一执行同一个异步函数
 [filename](./test.js ':include')

@@ -203,7 +203,7 @@ $.ajax({
 ## 浏览器渲染帧
 
 1000/60≈16.666667ms   
-每一帧：Input events`用户交互` ->js`js解析执行` -> rAF`requestAnimationCFrame调用上一次收集的callback回调` -> Layout`布局` -> Paint`绘制` ->Composite`合成各层渲染结果`
+每一帧：Input events`用户交互` ->js`js解析执行` -> rAF`requestAnimationFrame调用上一次收集的callback回调` -> Layout`布局` -> Paint`绘制` ->Composite`合成各层渲染结果`
 
 [16ms渲染帧](https://www.cnblogs.com/liuhao-web/p/8266872.html)
 

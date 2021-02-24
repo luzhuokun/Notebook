@@ -84,12 +84,19 @@ https://www.cnblogs.com/merray/p/7918977.html
 [WebSocket 教程](http://www.ruanyifeng.com/blog/2017/05/websocket.html)
 [socket.io库](https://socket.io/)  
 
-## http1.0、http1.1和http2.0
+## http1.0、http1.1和http2.0的区别
 
 - `http1.0`主要问题有`连接无法复用`(会导致每次请求都经历三次握手和慢启动)和`队头阻塞`(带宽无法被充分利用)
-- `http1.0`设置`Connection:Keep-Alive`在一段时间内复用tcp连接
-- `http1.1`http pipelining并发请求共用一个tcp连接解决`队头阻塞`问题，但存在不少缺陷。只有get、head请求能行，启动条件麻烦
-- `http2.0`主要改动`新的二进制格式`、`连接共享`、`优先级控制`、`header压缩`、`服务器推送`，参考了Google的SPDY协议(基于TCP的会话层协议)
+- `http1.1`主要区别
+  - 1、`长连接` 默认开启connection:keep-alive，复用TCP的信息，但是会创建多个TCP连接，一般浏览器同域限制是6个
+  - 2、`host域` 用于区分在一个物理服务器上存在多个虚拟主机共享一个IP地址
+  - 3、`缓存处理` 在1.0的If-Modified-since、expires的缓存标志上，再新增etag、If-match等缓存策略
+  - 4、`错误通知管理` 新增24个错误状态码
+- `http2.0`主要区别
+  - 1、`二进制格式` 以前的是文本格式
+  - 2、`多路复用`   所有请求通过一个TCP连接并发完成，连接共享、优先级控制
+  - 3、`header头部压缩` 降低带宽
+  - 4、`服务器推送` 不需求客户端发请求，提前把客户端需要的js、css等文件给到客户端
 
 !>
 [HTTP/2 相比 1.0 有哪些重大改进？](https://www.zhihu.com/question/34074946)

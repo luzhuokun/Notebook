@@ -1,3 +1,7 @@
+## 一次完整的HTTP请求过程
+
+域名DNS解析取目标IP -> TCP三次握手建立连接 -> 发送http请求 -> 解析http代码 ->请求http中的资源 ->浏览器渲染页面
+
 ## 浏览器渲染流程
 parse html (生成dom和cssdom，合并成render tree) -> javascript -> style (Recalculate Style计算样式)-> layout (重排) -> paint（重渲染） -> composite (Composite Layers 合成图像)
 

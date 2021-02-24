@@ -2,6 +2,22 @@
 
 [前端面试真题，会80%直接进大厂](https://bitable.feishu.cn/app8Ok6k9qafpMkgyRbfgxeEnet?from=logout&table=tblEnSV2PNAajtWE&view=vewJHSwJVd)
 
+## 排序
+### 快速排序
+[filename](./quickSort.js ':include')
+
+### 归并排序
+[filename](./mergeSort.js ':include')
+
+### 冒泡排序
+[filename](./bubble.js ':include')
+
+### 选择排序
+[filename](./selectSort.js ':include')
+
+### 插入排序
+[filename](./insertSort.js ':include')
+
 ## 数组内元素逐一执行同一个异步函数
 [filename](./test.js ':include')
 
@@ -24,7 +40,7 @@ new a.b(); // {y:222}
   3. 使用cookie或localstorage存储
 - 代码优化
   1. 减少dom操作
-  2. 
+  2. 防抖和节流
 
 !>[前端性能优化方案](https://www.cnblogs.com/coober/p/8078847.html)
 
@@ -65,3 +81,7 @@ https://juejin.cn/post/6844904114074173448
 
 ## 记一个element-ui中v-for与el-dialog一起使用的问题
 当el-dialog设置了append-to-body属性时，dialog会被挂载到最外面的body元素上面去，导致其上方的v-for元素动态增加元素时会加不上去，因为vue框架的核心是在insert元素的时候是会找下一个元素进行insertBefore操作的。dialog被挂到body上后就找不到他的parentNode了，就动态给v-for的元素加东西是加不上去了。
+
+## 防抖和节流
+- 防抖在第一次触发事件时，不立即执行函数，延时一段时间再执行
+- 节流则是让函数执行一次，然后在某个时间段内失效

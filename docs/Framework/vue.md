@@ -154,3 +154,6 @@ https://blog.csdn.net/RowanIT3/article/details/103182774/
 
 ## Vue Dep.target为什么需要targetStack来管理？
 https://segmentfault.com/q/1010000010095427
+
+## 大文件分片上传、秒传及断点续传
+https://www.cnblogs.com/xiahj/p/vue-simple-uploader.html

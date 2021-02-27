@@ -69,15 +69,16 @@ cross site request forgery 跨域请求伪造
 ## 同源跨域
 一个域下的js，在未经允许的情况下，不得读取另一个域的内容，但浏览器不会阻止你向另一个域发送请求。
 
+### 前后端跨域通信
 - JSONP
 - CORS （跨域资源共享）(是针对发出XMLHttpRequest请求的一个机制)
-- websocket
-- postmessage
-- 设置代理
+- websocket html5支持跨域通信的协议
+- 设置代理 nginx
 
 ?> [浏览器同源及其规避方法](https://www.cnblogs.com/TvvT-kevin/articles/12595350.html)
 
 ### 同源页面间的跨页面通信
+- postmessage html5中实现跨源通信，要拿到另一个页面的window来发起postmessage，另一个页面才能接收到消息
 - broadcastChannel，用于广播的通信频道，只要各个页面初始相同的频道标识就能相互通信
 - serviceWorker，一个可以长期运行在后台的worker
 - localstorage，当setItem发生变化时（要值真的改变）会触发storage监听事件

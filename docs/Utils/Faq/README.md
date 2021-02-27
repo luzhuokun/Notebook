@@ -10,13 +10,16 @@
 [filename](./code/mergeSort.js ':include')
 
 ### 冒泡排序
-[filename](./code/bubble.js ':include')
+[filename](./code/bubbleSort.js ':include')
 
 ### 选择排序
 [filename](./code/selectSort.js ':include')
 
 ### 插入排序
 [filename](./code/insertSort.js ':include')
+
+## 数组flat的模拟实现
+[filename](./code/fackFlat.js ':include')
 
 ## 数组内元素逐一执行同一个异步函数
 [filename](./test.js ':include')

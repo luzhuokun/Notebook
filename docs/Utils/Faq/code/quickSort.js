@@ -6,8 +6,10 @@ let quickSort = (arr, left, right) => {
     let j = right
     let v = arr[i]
     while (i < j) {
+      // 把右边小的放基准左边
       while (i < j && arr[j] >= v) j--
       arr[i] = arr[j]
+      // 把左边大的放基准右边
       while (i < j && arr[i] <= v) i++
       arr[j] = arr[i]
     }

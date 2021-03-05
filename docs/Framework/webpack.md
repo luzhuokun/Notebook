@@ -218,6 +218,12 @@ mainfest.js 在vendor的基础上，将一些异步加载打包进去
 app.js 主要放我们自己写的js代码等
 分离出这些文件，主要是想利用浏览器缓存，node_modules中的代码都不是常变化的话，因此用户在访问的时候，就不需要重新下载他们了。
 
+## tree-sharking及其工作原理
+ - 定义：在项目打包的时候清楚掉项目中不需要的多余代码
+ - 工作原理：webpack把代码转换成AST抽象语法树，利用es6的import和export语法做静态分析，把树中没有引用关系的部分去掉
+ - commonjs是动态引入适合tree-sharking机制
+ 
+
 ## 优化
 - 使用`webpack-bundle-analyzer`分析
 - 模块异步加载

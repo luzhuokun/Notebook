@@ -215,4 +215,21 @@ https://segmentfault.com/q/1010000010095427
 [循环引用](https://cn.vuejs.org/v2/guide/components-edge-cases.html#%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8)
 
 ## 大文件分片上传、秒传及断点续传
+
+- 使用xhr发送multipart/formData数据
+- 文件分片
+  - e.target.flies[0].slice进行切割
+- 断点续传 
+  - xmlhttprequest的abort暂停切片上传
+  - 根据后端返回的切片名，前端跳过已经上传成功的切片
+- 秒传 
+  - 根据文件hash判断上传过的文件直接提示上传成功
+- 使用spark-md5 
+  - 读取所有的文件切片，然后递归执行spark-md5的方法，最后求出文件的hash值
+  - 不能直接对整个文件做hash，内存占用高、阻塞主线程
+- 遇到的问题
+  - 在做断点续传的时候会出现文件进度条`倒退`现象，这个现象出现是因为我中断上传的时候把正在发起上传的分片都清掉了，然后再次发起上传的时候要从0开始，因为上传切片是并发的，在中断之后应该由后端来告诉我哪些传完哪些没传完，进度要重新算一遍，所以中断时候的进度条状态要保存下来，之后续传的时候再判断大于这个进度条状态再去更新进度条视图
+  - 计算大文件的md5时非常耗时，那把md5的计算放到web-worker子进程中去计算，计算好了通过postmessage回传回来，然后就再继续文件上传
+
 https://www.cnblogs.com/xiahj/p/vue-simple-uploader.html
+https://juejin.im/post/5dff8a26e51d4558105420ed

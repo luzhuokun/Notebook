@@ -34,6 +34,7 @@ Object、Array、Date、Function、RegExp
 [继承与原型链](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)  
 [js继承的几种方式](https://zhuanlan.zhihu.com/p/37735247)
 `Object.create`定义：创建一个新对象，并把这个新对象的__proto__指向提供过来的对象  
+(注意坑位：用此方法创建的对象没有继承Object，因此Object上的方法他都拿不到)
 
 ## 浏览器事件循环机制
 `主线程`把`同步任务`放到`调用栈`中执行，把不同的`异步任务`分别放入`microtask微任务队列`和`macrotask宏任务队列`中去，待`调用栈`空闲时执行`任务队列`中的事件，先把`microtask微任务队列`里所有的`微任务`执行，然后从`macrotask队列`中取一个`宏任务`执行，执行完后, 取出所有的`microtask`执行，如此重复就是`浏览器事件循环`。  

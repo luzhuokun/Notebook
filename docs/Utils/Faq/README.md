@@ -60,9 +60,8 @@ https://www.cnblogs.com/chenwenhao/p/12153332.html
 - ESM在ES6语法标准化后实现了模块功能，其模块功能语法主要包括export和import
 
 ## Common和ESM的区别
-- Common输出的内容是浅拷贝的，ESM则是引用的
-- Common在运行阶段加载模块，ESM在解析阶段生成接口并对外输出
-- ESM输出的内容只读，如果输出的内容是变量的话，属性还是可以修改的。
+- Common输出的内容是浅拷贝的，ESM则是返回值的只读引用(不管是require或import，多次调用都返回同一个对象)
+- Common在运行阶段加载模块，ESM在解析阶段生成接口并对外输出(因此在循环加载的时候，common只输出已经加载的部分代码，而esm会全部都能输出)
 
 ## 客户端渲染、服务器渲染（SSR）和预渲染（Prerendering）
 - 在前后端分离的背景下，把渲染页面的工作放在前端中进行，如react、vue、angular等主流框架。

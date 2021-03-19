@@ -9,6 +9,9 @@
 ### 归并排序
 [filename](./code/mergeSort.js ':include')
 
+### 堆排序
+[filename](./code/heapSort.js ':include')
+
 ### 冒泡排序
 [filename](./code/bubbleSort.js ':include')
 

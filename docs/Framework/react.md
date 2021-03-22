@@ -2,6 +2,11 @@
 [react官方文档](https://react.docschina.org)  
 [redux官方文档](https://www.redux.org.cn)  
 
+## fiber架构
+- 在浏览器空闲的时候再执行任务，把主线程腾出时间来处理其他更紧急的任务（时间分片）（底层技术api requestIdleCallback）
+- 把任务拆分碎片化
+- fiber采用链表树，每一个fiber节点包含3个指针，分别指向parent、child和sibling（相邻的节点）
+
 ## redux源码原理分析
 [Redux入口教程](http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html)
 

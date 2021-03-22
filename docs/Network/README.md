@@ -16,6 +16,11 @@ https://www.youtube.com/watch?v=nUkh7CKqGb8
 第三步 由于处于半关闭状态，服务器端还有数据发向客户端 等服务器端发送完最后的报文后 发送FIN=1，ACK=1，ack=u+1，seq=w 到客户端 服务器进入LAST-ACK状态  
 第四部 客户端发送ACK=1，seq=u+1，ack=w+1  客户端进入 TIME-WAIT 等待2MSL（最长报文段寿命）进入CLOSED状态 服务器端接收到消息后进入CLOSEED状态  
 
+!>
+为什么要等待2MSL？
+ - 防止ACK包丢失，服务器重发FIN+ACK包
+ - 确保包在网络中已失效
+
 **TCP三次和四次握手详解**  
 https://blog.csdn.net/qq_38950316/article/details/81087809  
 

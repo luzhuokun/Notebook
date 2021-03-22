@@ -140,6 +140,8 @@ plugins:[
 编译器和编译集合的区别，compiler代表了整个webpack从启动到关闭的生命周期，而compilation代表了一次新的编译。
 
 ## 打包流程
+初始化`参数`合并配置->加载所有`插件`->确定`入口`->开始`编译`(调用各种loader模块转换器)模块找出所有`依赖`模块->生成`资源`chunk->生成`文件`bundle到指定文件位置
+
 - optimist 命令行和参数解析
 - config 合并与插件加载
 - compile 开始编译 
@@ -218,16 +220,17 @@ mainfest.js 在vendor的基础上，将一些异步加载打包进去
 app.js 主要放我们自己写的js代码等
 分离出这些文件，主要是想利用浏览器缓存，node_modules中的代码都不是常变化的话，因此用户在访问的时候，就不需要重新下载他们了。
 
-## tree-sharking及其工作原理
- - 定义：在项目打包的时候清楚掉项目中不需要的多余代码
- - 工作原理：webpack把代码转换成AST抽象语法树，利用es6的import和export语法做静态分析，把树中没有引用关系的部分去掉
- - commonjs是动态引入适合tree-sharking机制
- 
+## treeshaking及其工作原理
+ - 定义：在bundle打包的时候清除掉包中不需要执行的代码
+ - 前提：es6的import和export语法去做静态分析
+ - 工作原理：webpack中，先利用babel把代码转生成AST抽象语法树，webpack再去分析ast树，把树中没有依赖关系的部分代码去掉
+ - commonjs是动态引入的不适合treeshaking机制
+ - 弊端：webpack自身的treeshaking不能分析副作用的模块代码，因为webpack是先加载资源的，再根据静态分析的结果来删除无用代码，如果未使用的副作用代码里使用了导入的模块，那webpack打包不会清掉这段无用的代码（1、写纯的无副作用代码 2、webpack-deep-scope-plugin去解决，原理是通过作用域分析来消除无用的代码）
 
 ## 优化
 - 使用`webpack-bundle-analyzer`分析
 - 模块异步加载
-- 第三方库按需引入，这样webpack可以做静态分析tree-sharking，把没用到的代码不打包
+- 第三方库按需引入(需提供ESM版本)，这样webpack可以做静态分析tree-sharking，把没用到的代码不打包
 - 抽取模块中公共代码，折腾CommonsChunkPlugin配置
 - 使用compression-webpack-plugin做gzip代码压缩,需要浏览器的支持
 - css代码如果不大可以不分离，不然会浪费时间在请求上面

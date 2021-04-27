@@ -229,3 +229,7 @@ $.ajax({
 !> `VLQ码`非常精简地表示很大的数值, 算法大概就是把字母变成二进制，然后借用base64的码表进行转码
 
 [JavaScript Source Map 详解](http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html)
+
+## scheme协议
+
+通过scheme协议，以页面跳转的方式打开本地app应用

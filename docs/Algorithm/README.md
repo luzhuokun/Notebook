@@ -19,3 +19,37 @@ const countSubstrings = (s) => {
 
 ## 尾递归
 在递归调用时，在整个函数的最后执行并且不在一个表达式内
+
+## 并查集
+  一种树型的数据结构，用于处理一些不相交集合的合并和查找问题
+```js
+class UnionFind {
+    constructor(n) {
+        this.parent = new Array(n).fill(0).map((el, index) => index)
+        this.size = new Array(n).fill(1)
+        this.setCount = n // 当前连通分量数目
+    }
+    findset(x) {
+        if (this.parent[x] === x) return x
+        // 把相连的多层变成一层的结构
+        this.parent[x] = this.findset(this.parent[x])
+        return this.parent[x]
+    }
+    unite(a, b) {
+        let x = this.findset(a)
+        let y = this.findset(b)
+        if (x === y) return false
+        if (this.size[x] < this.size[y]) [x, y] = [y, x]
+        // 连起来
+        this.parent[y] = x
+        this.size[x] += this.size[y]
+        this.setCount -= 1
+        return true
+    }
+    connected(a, b) {
+        const x = this.findset(a)
+        const y = this.findset(b)
+        return x === y
+    }
+}
+```

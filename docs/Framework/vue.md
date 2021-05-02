@@ -239,6 +239,9 @@ https://segmentfault.com/q/1010000010095427
   - 可以利用异步组件解决
 [循环引用](https://cn.vuejs.org/v2/guide/components-edge-cases.html#%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8)
 
+## Vue不断循环updated更新组件问题
+  举例当一个数据x在template中使用时，会被当前的组件watcher订阅，当数据发生变化时通知watcher执行render重渲染，然后执行updated钩子，如果updated钩子中又去改变这个x值，那么又会把当前的watcher放入更新队列中，因此不断循环至到循环上限报错。
+
 ## 大文件分片上传、秒传及断点续传
 
 - 使用xhr发送multipart/formData数据

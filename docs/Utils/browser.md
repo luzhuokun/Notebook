@@ -8,6 +8,7 @@ parse html (生成dom和cssdom，合并成render tree) -> javascript -> style (R
 ## html的加载执行流程
  先解析head标签内的信息 -> 解析meta信息 -> 并行加载link标签下的资源 -> 遇到script并行下载，但要等之前加载的link资源加载并解析完成 ->在body中遇到script会并行加载，解析的话要等加载完再一个接一个地解析并行下载的script，遇到img那些资源则不等待继续往下解析。
 
+script放在head中时（不加async和defer）会阻塞后面body中的标签加载(测试发现所有的资源会并行的下载)
 [一个完整html的加载执行过程](https://blog.csdn.net/csdn_girl/article/details/90520036)
 
 ## Memory分析内容泄露
@@ -229,3 +230,7 @@ $.ajax({
 !> `VLQ码`非常精简地表示很大的数值, 算法大概就是把字母变成二进制，然后借用base64的码表进行转码
 
 [JavaScript Source Map 详解](http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html)
+
+## 进程和线程
+- 进程是资源分配的基本单位
+- 线程是资源调度的基本单位

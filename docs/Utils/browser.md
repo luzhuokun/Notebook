@@ -77,9 +77,10 @@ cross site request forgery 跨域请求伪造
 
 ### 前后端跨域通信
 - JSONP
-- CORS （跨域资源共享）(是针对发出XMLHttpRequest请求的一个机制)
+- CORS通信 （跨域资源共享）(是针对发出XMLHttpRequest请求的一个机制)
 - websocket html5支持跨域通信的协议
 - 设置代理 nginx
+- iframe+postMessage
 
 ?> [浏览器同源及其规避方法](https://www.cnblogs.com/TvvT-kevin/articles/12595350.html)
 

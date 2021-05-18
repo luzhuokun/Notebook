@@ -1,20 +1,22 @@
 // 堆排序
 
 function heapsort(arr) {
-  function shiftdown(arr, i, len) {
-    let left = 2 * i + 1, right = 2 * i + 2, largest = i
-    if (left < len && arr[left] > arr[largest]) largest = left
-    if (right < len && arr[right] > arr[largest]) largest = right
-    if (largest != i) {
-      [arr[i], arr[largest]] = [arr[largest], arr[i]]
-      return shiftdown(arr, largest, len)
+  function shiftdown(arr, left, right) {
+    const i = 2 * left + 1
+    const j = 2 * left + 2
+    let largest = left
+    if (i < right && arr[i] > arr[largest])largest = i
+    if (j < right && arr[j] > arr[largest])largest = j
+    if (largest !== left) {
+      [arr[largest], arr[left]] = [arr[left], arr[largest]]
+      shiftdown(arr, largest, right)
     }
   }
   for (let i = Math.floor(arr.length / 2) - 1; i >= 0; i--) {
     shiftdown(arr, i, arr.length)
   }
   for (let i = arr.length - 1; i > 0; i--) {
-    [arr[0], arr[i]] = [arr[i], arr[0]]
+    [arr[i], arr[0]] = [arr[0], arr[i]]
     shiftdown(arr, 0, i)
   }
   return arr

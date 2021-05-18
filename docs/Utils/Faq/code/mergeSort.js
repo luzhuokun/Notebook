@@ -2,31 +2,27 @@
 
 let mergeSort = (arr, left, right) => {
   if (left < right) {
-    let mid = Math.floor(left + (right - left) / 2)
+    const mid = left + (right - left>>1)
     mergeSort(arr, left, mid)
     mergeSort(arr, mid + 1, right)
     // 合并
     let i = left
     let j = mid + 1
-    let temp = []
+    const temp = []
     while (i <= mid && j <= right) {
       if (arr[i] < arr[j]) {
-        temp.push(arr[i])
-        i++
+        temp.push(arr[i++])
       } else {
-        temp.push(arr[j])
-        j++
+        temp.push(arr[j++])
       }
     }
     while (i <= mid) {
-      temp.push(arr[i])
-      i++
+      temp.push(arr[i++])
     }
     while (j <= right) {
-      temp.push(arr[j])
-      j++
+      temp.push(arr[j++])
     }
-    temp.forEach(x => arr[left++] = x)
+    temp.forEach((x) => { arr[left++] = x })
   }
 }
 

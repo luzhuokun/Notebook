@@ -14,9 +14,8 @@ let quickSort = (arr, left, right) => {
       arr[j] = arr[i]
     }
     arr[i] = v
-    let index = i
-    quickSort(arr, left, index - 1)
-    quickSort(arr, index + 1, right)
+    quickSort(arr, left, i - 1)
+    quickSort(arr, i + 1, right)
   }
 }
 

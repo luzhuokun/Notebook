@@ -20,6 +20,24 @@ const countSubstrings = (s) => {
 ## 尾递归
 在递归调用时，在整个函数的最后执行并且不在一个表达式内
 
+## 字典树
+```js
+class Trie {
+  constructor() {
+    this.next = {}
+    this.isEnd = false
+  }
+  insert(str) {
+    let curRoot = this
+    str.split('').forEach((elm) => {
+      if (!curRoot.next[elm]) curRoot.next[elm] = new Trie()
+      curRoot = curRoot.next[elm]
+    })
+    curRoot.isEnd = true
+  }
+}
+```
+
 ## 并查集
   一种树型的数据结构，用于处理一些不相交集合的合并和查找问题
 ```js

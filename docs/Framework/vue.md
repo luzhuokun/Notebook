@@ -253,11 +253,13 @@ https://segmentfault.com/q/1010000010095427
 - 秒传 
   - 根据文件hash判断上传过的文件直接提示上传成功
 - 使用spark-md5 
-  - 读取所有的文件切片，然后递归执行spark-md5的方法，最后求出文件的hash值
-  - 不能直接对整个文件做hash，内存占用高、阻塞主线程
+  - 读取所有的文件切片，然后递归执行spark-md5的方法，最后求出文件的hash值（使用webworker去算不阻塞主线程）
+  - 不能直接对整个文件做hash，内存占用高、阻塞主线程、而且会出现不同文件出现相同的hash值
 - 遇到的问题
   - 在做断点续传的时候会出现文件进度条`倒退`现象，这个现象出现是因为我中断上传的时候把正在发起上传的分片都清掉了，然后再次发起上传的时候要从0开始，因为上传切片是并发的，在中断之后应该由后端来告诉我哪些传完哪些没传完，进度要重新算一遍，所以中断时候的进度条状态要保存下来，之后续传的时候再判断大于这个进度条状态再去更新进度条视图
   - 计算大文件的md5时非常耗时，那把md5的计算放到web-worker子进程中去计算，计算好了通过postmessage回传回来，然后就再继续文件上传
+  - 用steam流读写代替Buffer读写，省内存效果高。（一读一写一删） `fs.creatWriteStream`可以使用第二个参数start控制把流传到正确的位置，以此来实现并发写入(暂时来看不可行)
 
 https://www.cnblogs.com/xiahj/p/vue-simple-uploader.html
-https://juejin.im/post/5dff8a26e51d4558105420ed
+https://juejin.cn/post/6844904046436843527
+https://www.cnblogs.com/goloving/p/12825973.html

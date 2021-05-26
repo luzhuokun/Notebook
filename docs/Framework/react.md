@@ -21,10 +21,12 @@
 
 [React 15的diff和React16的区别](https://blog.csdn.net/halations/article/details/109284050)
 
-## hooks钩子理解
-- `特点`：增强副效应中代码的可复用性、使函数组件有状态
-- 钩子（hook）就是 React 函数组件的副效应解决方案，用来为函数组件引入副效应  
-[轻松学会 React 钩子：以 useEffect() 为例](http://www.ruanyifeng.com/blog/2020/09/react-hooks-useeffect-tutorial.html)
+## hook钩子理解
+
+- 在不编写class的情况下使用state及其他的react特性
+- 清楚地知道数据的来源，让组件内逻辑清晰
+- 只能在函数组件中使用，约定名称是use开头
+
 [关于React中useEffect以及Hooks的思考](https://www.jianshu.com/p/101ce42b8800)
 
 ## showComponentUpdate

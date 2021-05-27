@@ -1,11 +1,6 @@
 ## 通信模型
 
-渲染层         逻辑层
-多个webview    jscore
-   ↓            ↓
-       native (JSBridge)
-          ↕  HTTPS Request、websocket
-      第三方服务器
+渲染层(多个webview) + 逻辑层(jscore) -> native (JSBridge) -> HTTPS Request、websocket -> 第三方服务器
 
 渲染和逻辑是分开的，web浏览器是互斥的
 https://www.kancloud.cn/tatahy/weixin/708921

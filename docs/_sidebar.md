@@ -47,10 +47,10 @@
 
 * 微信对接相关
 
-  * [小程序](Wechat/miniprogram.md)
-  * [公众号](Wechat/officialAccount.md)
-  * [订购对接](Wechat/order.md)
-  * [未分类](Wechat/)
+  * [小程序](WeChat/miniprogram.md)
+  * [公众号](WeChat/officialAccount.md)
+  * [订购对接](WeChat/order.md)
+  * [未分类](WeChat/)
 
 * 游戏开发
   

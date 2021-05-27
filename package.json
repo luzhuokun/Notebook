@@ -1,7 +1,7 @@
 {
   "name": "notebook",
   "version": "1.0.0",
-  "description": "个人学习博客",
+  "description": "个人博客",
   "main": "index.js",
   "directories": {
     "doc": "docs"

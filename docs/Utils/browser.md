@@ -80,7 +80,9 @@ cross site request forgery 跨域请求伪造
 - CORS通信 （跨域资源共享）(是针对发出XMLHttpRequest请求的一个机制)
 - websocket html5支持跨域通信的协议
 - 设置代理 nginx
-- iframe+postMessage
+- iframe
+  - postmessage（要等到嵌入的iframe页面加载完再进行通信）
+  - 多层iframe嵌套（a.html嵌套b.html，b.html嵌套一个跟a域相同的页面，然后b域请求数据，后把数据带到这个页面上，然后这个页面上利用window.top预先存好的函数，然后把数据传进去执行）
 
 ?> [浏览器同源及其规避方法](https://www.cnblogs.com/TvvT-kevin/articles/12595350.html)
 

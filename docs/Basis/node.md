@@ -46,3 +46,8 @@ https://www.cnblogs.com/eret9616/p/11105840.html
 - 调用`child_process`启动子进程返回主进程的`process对象`，当在主进程获取它后，就可以共享worker进程的消息能力，从而在资源隔离的条件下实现master和worker进程的`跨进程通讯`。
 
 https://www.cnblogs.com/dashnowords/p/10958457.html
+
+## 直播
+
+### Node-Media-Server
+https://github.com/illuspas/Node-Media-Server/blob/master/README_CN.md

@@ -12,7 +12,7 @@
 
 [filename](../Utils/Polyfill/redux/store.js ':include')
 
-## React15和15的diff区别
+## React15和16的diff区别
 
 - 16是链表形式的虚拟dom结构，每个节点都是一个Fiber，而15是树结构，每个节点都是虚拟dom
 - 16在diff阶段是可中断、暂停、复用渲染任务，让每一个Fiber的diff和patch都变得可控，15中的diff是不可中断的

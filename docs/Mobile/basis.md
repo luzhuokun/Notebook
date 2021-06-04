@@ -17,3 +17,17 @@
  - 通过定制化的JSBridge，使用`双线程的模式`，`隔离`了`js逻辑层`和`UI渲染层`，提高页面性能及开发体验
 
 https://seminelee.com/2019/05/08/rn-miniprogram/
+
+## 移动端页面适配方案
+- meta viewport
+- css3 @media媒体查询
+- 动态rem方案 [flexible布局](http://caibaojian.com/flexible-js.html)
+- vw/vh
+- flex布局
+- grid布局
+
+[移动端Web页面适配方案（整理版）](https://www.jianshu.com/p/2c33921d5a68)
+
+## 1px问题
+- 设置initial-scale为1/dpr
+- transform的scale属性

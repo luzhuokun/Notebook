@@ -1,15 +1,3 @@
-
-## 移动端页面适配方案
-
-- meta viewport
-- css3 @media媒体查询
-- 动态rem方案 [flexible布局](http://caibaojian.com/flexible-js.html)
-- vw/vh
-- flex布局
-- grid布局
-
-[移动端Web页面适配方案（整理版）](https://www.jianshu.com/p/2c33921d5a68)
-
 ## First Paint、DOMContentLoaded和Onload的区别
 
 - `First Paint`是指html中第一个script执行之前dom的渲染和cssom的构建情况

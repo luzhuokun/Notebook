@@ -71,3 +71,18 @@ class UnionFind {
     }
 }
 ```
+
+## 洗牌算法
+```js
+function sort1(arr) {
+  return arr.sort(() => Math.random - 0.5)
+}
+function sort2(arr) {
+  let len = arr.length;
+  for (let i = len; i > 1; i--) {
+    let index = Math.floor(Math.random() * i);
+    [arr[index], arr[i - 1]] = [arr[i - 1], arr[index]];
+  }
+  return arr;
+}
+```

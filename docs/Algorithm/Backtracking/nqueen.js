@@ -21,7 +21,7 @@ const isPlace = (x) => {
 }
 
 const loop = (x) => {
-  if (x >= n){
+  if (x >= n) {
     console.log(q);
     return sum++;
   }

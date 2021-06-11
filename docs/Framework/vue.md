@@ -268,3 +268,8 @@ https://segmentfault.com/q/1010000010095427
 https://www.cnblogs.com/xiahj/p/vue-simple-uploader.html
 https://juejin.cn/post/6844904046436843527
 https://www.cnblogs.com/goloving/p/12825973.html
+
+## vue-router
+
+### vue-router的一些问题
+- 3.0.2版本没有addRoute属性，并且不支持路由覆盖，如果只是动态改变路由的话，使用addRoutes就行。如果要动态改变路由上的信息的话，有两条路子可以：1、把需要动态的路由通过addRoutes添加。2、重新new一个router路由替换旧的router上的matcher属性。

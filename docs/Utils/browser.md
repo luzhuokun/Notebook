@@ -5,6 +5,8 @@
 ## 浏览器渲染流程
 parse html (生成dom和cssdom，合并成render tree) -> javascript -> style (Recalculate Style计算样式)-> layout (重排) -> paint（重渲染） -> composite (Composite Layers 合成图像)
 
+![浏览器一帧的工作](https://aerotwist.com/static/blog/the-anatomy-of-a-frame/anatomy-of-a-frame.svg)
+
 ## html的加载执行流程
  先解析head标签内的信息 -> 解析meta信息 -> 并行加载link标签下的资源 -> 遇到script并行下载，但要等之前加载的link资源加载并解析完成 ->在body中遇到script会并行加载，解析的话要等加载完再一个接一个地解析并行下载的script，遇到img那些资源则不等待继续往下解析。
 

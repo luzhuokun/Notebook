@@ -13,7 +13,9 @@
 [DOMContentLoaded 与 load事件](https://blog.csdn.net/liubangbo/article/details/86298859)  
 [Chrome的First Paint触发的时机探究](https://www.cnblogs.com/hongrunhui/p/8929001.html)  
 
-
+## onError
+- 只能捕获同步任务和宏任务产生的错误
+- 不能捕获微任务方法产生的错误
 ## onload的坑
 
 - document上挂载onload不会触发，window上才可以

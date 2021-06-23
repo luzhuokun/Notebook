@@ -64,9 +64,9 @@ new a.b(); // {y:222}
 ## 前端安全问题
  - xss（跨域脚本攻击）
  - csrf（跨域请求伪造）
- - 注意iframe的使用（可以让iframe只做显示，限制其发起请求和其他动作）
+ - 注意iframe的使用（可以让iframe只做显示，限制其发起请求和其他动作）(sandbox)
  - 注意引入的第三方库
- - 注意内容推断问题（img的src有执行script的能力）
+ - 注意内容推断问题（img的src有执行script的能力）(设置X-Content-Type-Options:nosniff)
  - 注意本地数据泄露
 ## 编码、摘要和加密的区别
 - 编码 Ascoll Unicode Base64

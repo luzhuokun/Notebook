@@ -125,3 +125,7 @@ Domain Name System 域名系统
 
 !?>
 [DNS常见攻击与防范](https://www.williamlong.info/archives/3813.html)
+
+## Protocol Buffer(简称 Protobuf)
+ - PB协议是Google的一种数据交换的格式，是一种二进制格式，比XML数据交换更快。
+ - 效率高、兼容性好

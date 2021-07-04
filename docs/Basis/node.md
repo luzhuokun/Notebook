@@ -41,9 +41,10 @@ https://www.cnblogs.com/eret9616/p/11105840.html
 
 ### cluster模块原理
 
-- 创建主进程`master`
-- `fork`多个子进程`worker`
+- 创建主进程`master`（负责管理和调度）
+- `fork`多个子进程`worker`（负责具体业务处理）
 - 调用`child_process`启动子进程返回主进程的`process对象`，当在主进程获取它后，就可以共享worker进程的消息能力，从而在资源隔离的条件下实现master和worker进程的`跨进程通讯`。
+- 默认情况下根据cpu数量创建多个worker子进程，并在master上创建一个tcp服务器，当有请求来的时候会负载均衡到每个worker上。但是可以让多个worker同时监听相同的端口，但这会失去负载均衡而变成抢占式调度。
 
 https://www.cnblogs.com/dashnowords/p/10958457.html
 

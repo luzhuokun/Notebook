@@ -238,5 +238,9 @@ app.js 主要放我们自己写的js代码等
 [首屏性能优化](https://segmentfault.com/a/1190000019499007)
 
 ## 分包策略
+[vue-element-admin分包策略](https://juejin.cn/post/6844903652956585992)
 
-[vue-element-admin分包策略](https://www.cnblogs.com/chris-oil/p/13941815.html)
+## 问题
+- treesharking在webpack中的整个流程什么时间执行
+先根据模块间依赖进行shaking，然后合并到对应的chunk中，然后有个问题就是某chunk中有些方法用不上的也会被合并进来（看下是否要把公共代码提取出来）
+2、如何分包

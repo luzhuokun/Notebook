@@ -44,3 +44,13 @@ db.access_log.ensureIndex({"startTime":1});
 
 ## 修改
 db.acl_user.update({"name":"xxx"},{$set: {"type" : "superAdminInTech"}})
+
+
+## 启动mongo进程
+/usr/local/mongodb/bin/mongod
+
+mongod --dbpath /usr/local/var/mongodb --logpath /usr/local/var/log/mongodb/mongo.log --fork
+
+ps aux | grep -v grep | grep mongod
+
+https://www.runoob.com/mongodb/mongodb-osx-install.html

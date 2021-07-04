@@ -95,7 +95,7 @@ https://www.cnblogs.com/merray/p/7918977.html
 - `http1.1`主要区别
   - 1、`长连接` 默认开启connection:keep-alive，复用TCP的信息，但是会创建多个TCP连接，一般浏览器同域限制是6个
   - 2、`host域` 用于区分在一个物理服务器上存在多个虚拟主机共享一个IP地址
-  - 3、`缓存处理` 在1.0的If-Modified-since、expires的缓存标志上，再新增etag、If-match等缓存策略
+  - 3、`缓存处理` last-modified（精确到秒）、etag（文件唯一标识）。下次请求的带上if-modified-since、if-none-match到后端进行比对
   - 4、`错误通知管理` 新增24个错误状态码
 - `http2.0`主要区别
   - 1、`二进制格式` 以前的是文本格式

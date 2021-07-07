@@ -152,15 +152,13 @@ $.ajax({
 ```
 
 ## 浏览器缓存（http缓存）
-
-- http1.0 `Pragma:no-cache`; http1.1 `Cache-Control:no-cache`
-- http1.0 `Expires`; http1.1 `Cache-Control:max-age`=秒
-- `Cache-Control`优先级高于`Expires`
+- http1.0 `Expires`; http1.1 `Cache-Control:max-age=xx秒` (no-cache不使用缓存、no-store不保存缓存)
+- `expires`返回的是资源过期的服务器时间，如果客户端的时间和服务器端的时间相差很远的话就会有很大误差
+- `Cache-Control`优先级高于`Expires`, 根据请求时间date+max-age看看过期没，没过期就继续用缓存的，过期了就发起请求
 - http1.0 `last-modified`资源最后修改时间，`if-modified-since`资源上次的`last-modified`时间; http1.1 `Etag` 校验值 在服务器内的唯一标识。
 - `if-none-match` 当客户端资源过期，资源有`Etage`声明，则把`Etage`赋值给`if-none-match`一起传给服务器,服务器计算当前资源的新`Etag`与`if-none-match`进行比较，没变化返回304，有变化则返回200和资源
 - `Cache-Control/Expires`优先级高于`Last-Modified/Etag`,即当当地副本根据`Cache-Control/Expires`发现还在有效期内，则不会再次发送请求去服务器询问修改时间`Last-Modified`或者实体标识符`Etag`
 - `Etag`弥补`Last-Modified`只能精确到秒的缺陷
-- `Etag`优先级高于`Last-Modified`
 [浏览器缓存机制详解](https://blog.csdn.net/hhthwx/article/details/80152728)
 
 ### 强缓存和协商缓存
@@ -242,3 +240,32 @@ $.ajax({
 
 ## scheme协议
 通过scheme协议，以页面跳转的方式打开本地app应用
+
+## 单点登录
+建一个sso服务，服务于多个其他应用
+- 同域名下，通过基于能访问顶级域名的cookie信息的机制来实现，通过redis来做seesion共享
+- 不同域名下，通过跳转，跳转到sso的服务地址进行登录认证，然后把登录认证产生的`授权令牌`access_token发送给应用服务，然后通过后端向sso服务器求证这个`授权令牌`access_token的有效性，然后再做自己系统的session建立。（这个令牌只在服务器端之间传递，应该没什么问题）
+
+https://www.jianshu.com/p/75edcc05acfd
+
+## 垃圾回收机制
+周期性地检查内存的使用情况，并把一些不再使用的内存给释放掉，解决内存泄漏的问题。
+
+### 实现垃圾回收的方式
+- 标记清除（大多数是这个）
+- 引用计数
+
+### Chrome的v8还对gc进行优化
+对堆的数据保存分为新生代和老生代
+- 新生代存储空间小，不存放大对象
+- 空间大，存活时间长，新生代经过2次GC还仍然存活的变量会进入老生代
+- 对新生代的检查会比老生代频繁
+
+### 造成泄漏的原因
+- 无用的`全局变量`没有被释放
+- `dom引用`没有被释放
+- `闭包`
+- 无用的`定时`没有被释放
+- 避免`死循环`
+
+### 垃圾回收触发后是会暂用主线程的，执行完毕再恢复执行

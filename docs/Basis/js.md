@@ -76,3 +76,13 @@ process.nextTick(node才有) 、Promise 、MutationObserver(浏览器才有) 、
 - WeakSet和WeakMap都是弱引用，WeakSet中的值和WeakMap中的键只能是对象，当它是某个对象的仅存引用时，也不会屏蔽垃圾回收
 
 参考：[Function.prototype.bind()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+
+## 执行上下文
+- 一段代码的执行就会产生一个执行上下文，执行上下文用于跟踪代码的运行情况，执行上下文被保存到一个stack栈中，当代码执行到尾部时就弹出stack
+
+## 作用域
+- 作用域在函数执行的时候产生，包含了变量、常数、函数等定义和赋值信息。
+- 作用域包括：全局作用域、函数作用域、块级作用域
+
+### 作用域链
+当要寻找一个对象时，当前的作用域上找不到这个对象就会往上一个作用域去找，直到往全局作用域去找

@@ -47,9 +47,7 @@ db.acl_user.update({"name":"xxx"},{$set: {"type" : "superAdminInTech"}})
 
 
 ## 启动mongo进程
-/usr/local/mongodb/bin/mongod
-
-mongod --dbpath /usr/local/var/mongodb --logpath /usr/local/var/log/mongodb/mongo.log --fork
+/usr/local/mongodb/bin/mongod --dbpath /usr/local/var/mongodb --logpath /usr/local/var/log/mongodb/mongo.log --fork
 
 ps aux | grep -v grep | grep mongod
 

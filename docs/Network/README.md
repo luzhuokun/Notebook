@@ -28,7 +28,6 @@ https://blog.csdn.net/qq_38950316/article/details/81087809
 https://baijiahao.baidu.com/s?id=1626222867928553865&wfr=spider&for=pc
 
 ## 状态码
-
 - 200  请求成功  
 - 201  请求成功并处理  
 - 202  请求成功但没有处理  
@@ -105,6 +104,16 @@ https://www.cnblogs.com/merray/p/7918977.html
 
 !>
 [HTTP/2 相比 1.0 有哪些重大改进？](https://www.zhihu.com/question/34074946)
+
+## https
+### 通信加密过程
+- tcp的三次握手
+- 客服端发送随机串1、加密算法给服务器端
+- 服务器返回随机串2和证书返回给客户端
+- 客户端通过CA机构验证证书的有效性
+- 通过CA证书解密出的公钥加密随机串3发送给服务器端
+- 服务器端通过私钥进行解密
+- 随后根据这个随机串3进行对称加密的传输
 
 ## dns
 Domain Name System 域名系统  

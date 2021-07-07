@@ -1,6 +1,17 @@
 
 ## 支付
+- 用户下单，我们的后台向微信支付系统发起创建订单请求，并把订单号保存到我们的服务器上面去
+- 用户发起支付，调起收银台，然后输入密码确认支付
+- 后端异步收到微信服务器响应的订单支付的结果并保存起来，如果后端没收到支付回调通知的请求，那就主动地去查询订单的支付结果，然后把结果返回到页面上面去
+
 https://pay.weixin.qq.com/wiki/doc/apiv3/open/pay/chapter1_1_1.shtml
 
-## auth2.0
+## oauth2.0
+授权第三方应用去获取用户信息
+- 首先访问我们的页面，然后把用户重定向到`授权地址`
+- 用户同意授权，获取`code`，跳转我们带过去的重定向地址`redirect_uri`带上用户的授权code（用一次，5分钟未使用就过期）
+- 随后在后台中利用用户的授权code，然后拿着这个code向微信公众号服务器`access_token`和`openid`(2小时有效)
+- 通过access_token和openid获取用户信息
+- 后续做自己系统内部的业务信息
+
 https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html

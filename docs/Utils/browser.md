@@ -5,6 +5,25 @@
 ## 浏览器渲染流程
 parse html (生成dom和cssdom，合并成render tree) -> javascript -> style (Recalculate Style计算样式)-> layout (重排) -> paint（重渲染） -> composite (Composite Layers 合成图像)
 
+### 口述渲染流程
+- 解析html上的标签信息生成dom树
+- 收集css样式信息生成cssdom树
+- 通过dom树和cssdom树构建render树
+- 对render进行一次布局和绘制
+- 合成图像最终把页面呈现出去
+
+### transform:translate启动GPU硬件加速
+当使用transform:translate去做动画效果的时候，启动GPU硬件加速，然后浏览器会新生成一层合成层，在这个合成层里面去绘制动画效果。不会引起页面的重绘和重排。
+
+### 可以使用GPU加速的css3属性
+- transform（变形）
+- opacity（透明度）
+- filter（滤镜）
+### 渲染相关的坑
+- 第一次设置position会造成周围附近dom的重绘重排，第二次以后他已经是脱离文档流了，他只会引起自己和自己内部元素的重绘重排
+- will-change:transfrom设置生成新的合成层，如果直接设置transfrom是不会产生新的合成层的
+- 绝对布局虽然脱离了文档流，但不会创建新的复合图层，因此当绝对布局改变时，不会影响普通文档流的 render tree，但是依然会绘制整个默认复合图层，对普通文档流是有影响的。普通文档流就是默认复合图层，不要介意我交换使用它们如果你要使用硬件加速方式降低重排的影响，请不要过度使用，创建新的复合图层是有额外消耗的，比如更多的内存消耗
+
 ![浏览器一帧的工作](https://aerotwist.com/static/blog/the-anatomy-of-a-frame/anatomy-of-a-frame.svg)
 
 ## html的加载执行流程

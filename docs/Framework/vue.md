@@ -283,6 +283,14 @@ https://www.cnblogs.com/goloving/p/12825973.html
 
 ## vue-router
 
+### hash模式
+- 改变url上的#后面的hash值，页面不会刷新，不会向服务器发起请求
+- 通过监听window.onhashchange事件，达到跳转页面的效果
+
+### history模式
+- 调用html5的history api方法（forward、back、go、pushState、replaceState）
+- 监听window.onpopstate事件
+
 ### vue-router的一些问题
 - 3.0.2版本没有addRoute属性，并且不支持路由覆盖，如果只是动态改变路由的话，使用addRoutes就行。如果要动态改变路由上的信息的话，有两条路子可以：1、把需要动态的路由通过addRoutes添加。2、重新new一个router路由替换旧的router上的matcher属性。
 ## vue局部引入css的问题

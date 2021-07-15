@@ -138,3 +138,9 @@ Domain Name System 域名系统
 ## Protocol Buffer(简称 Protobuf)
  - PB协议是Google的一种数据交换的格式，是一种二进制格式，比XML数据交换更快。
  - 效率高、兼容性好
+
+## websocket
+原生实现上只能传递`文本字符串`或`二进制数据`（blob对象或Arraybuffer对象）
+
+### socket.io
+- 封装了短轮训、长轮训和websocket，屏蔽了很多细节差异和兼容性问题，实现跨浏览器和跨设备的双向通信

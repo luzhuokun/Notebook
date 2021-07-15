@@ -29,7 +29,7 @@
 
 [关于React中useEffect以及Hooks的思考](https://www.jianshu.com/p/101ce42b8800)
 
-## showComponentUpdate
+## shouldComponentUpdate
 凡是调用setState都会触发render，即使state没有改变，为了避免性能上的浪费，React 提供了一个 `shouldComponentUpdate` 来控制触发 vdom re-render 逻辑的条件  
 
 ## immutable.js

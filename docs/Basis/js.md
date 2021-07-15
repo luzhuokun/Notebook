@@ -16,6 +16,10 @@ Object、Array、Date、Function、RegExp
 
 ?>[JS引擎线程的执行过程](https://www.jianshu.com/p/0972f9ed4a8c)
 
+## Blob二进制文件对象
+存放二进制数据
+- File继承Blob对象，浏览器将Blob存储在内容或者磁盘上，如果Blob非常大是不能直接存到内存上的，会缓存到磁盘上
+https://www.cnblogs.com/tianma3798/p/13582341.html
 
 ## 原型
 

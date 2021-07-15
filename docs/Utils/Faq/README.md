@@ -62,6 +62,7 @@ new a.b(); // {y:222}
   - 控制首屏白屏的时间，越短越好
 
 !>[前端性能优化方案](https://www.cnblogs.com/coober/p/8078847.html)
+!>[渲染性能优化手段](https://blog.csdn.net/fesfsefgs/article/details/105918451)
 
 ## 前端安全问题
  - xss（跨域脚本攻击）

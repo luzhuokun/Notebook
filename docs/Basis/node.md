@@ -52,3 +52,8 @@ https://www.cnblogs.com/dashnowords/p/10958457.html
 
 ### Node-Media-Server
 https://github.com/illuspas/Node-Media-Server/blob/master/README_CN.md
+
+## express和koa2的区别
+- koa2比express更轻量级
+- express回调模式，koa2使用async/await模式
+- express的中间件为异步函数的时候，处理有问题，没有严格按照洋葱模型

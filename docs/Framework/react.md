@@ -30,7 +30,8 @@
 [关于React中useEffect以及Hooks的思考](https://www.jianshu.com/p/101ce42b8800)
 
 ## shouldComponentUpdate
-凡是调用setState都会触发render，即使state没有改变，为了避免性能上的浪费，React 提供了一个 `shouldComponentUpdate` 来控制触发 vdom re-render 逻辑的条件  
+- 凡是调用setState都会触发render，即使state没有改变，为了避免性能上的浪费，React 提供了一个 `shouldComponentUpdate` 来控制触发 vdom re-render 逻辑的条件  
+- vue不需要这个方法是因为他有依赖收集机制，基本上能精确知道哪些组件和dom是真的需要更新的
 
 ## immutable.js
 - 保持原有的数据结构不变

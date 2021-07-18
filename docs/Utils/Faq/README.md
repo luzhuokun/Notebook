@@ -97,9 +97,9 @@ https://www.cnblogs.com/chenwenhao/p/12153332.html
 - mvvm就是viewModel实现了数据的双向绑定，view和model不直接通信
 
 ## react和vue的比较
-- react需要手动优化组件渲染
 - JSX写法 template模版写法
-- css作用域方面也是通过js来控制，vue中使用style scoped来控制
+- shouldComponentUpdate手动渲染
+- react无指令和插槽
 - 社区支持 官方支持
 
 ## 箭头函数和babel造成的this调试问题

@@ -2,8 +2,22 @@
 https://astexplorer.net/
 
 ## 基本数据类型
-
 String、Number、Boolean、Underfind、Null、Symbol
+[细说 JavaScript 七种数据类型](https://www.cnblogs.com/onepixel/p/5140944.html)
+[js中的数据、内存和变量](https://blog.csdn.net/Wayne1998/article/details/80458439)
+
+## 数组array
+- 数组内所有元素`相同类型`
+- 分配一块`连续的内存存储`
+- 通过`索引`计算`存储地址`快速地找到数据
+
+!> 注意：js的数组比较特殊
+- 元素不同类型
+- 长度不固定
+
+### v8引擎区分快数组和慢数组
+- 一般建立快数组，分配一块连续的内存空间并预留一些空间扩充
+- 快慢数组间可以相互转行，当快数组扩容的数量大于1024就变慢数组，慢数组缩容至原来的50%以下就变慢数组
 
 ## 引用数据类型
 
@@ -21,8 +35,12 @@ Object、Array、Date、Function、RegExp
 - File继承Blob对象，浏览器将Blob存储在内容或者磁盘上，如果Blob非常大是不能直接存到内存上的，会缓存到磁盘上
 https://www.cnblogs.com/tianma3798/p/13582341.html
 
-## 原型
+## ArrayBuffer和Blob
+- 都是用于存储二进制数据
+- ArrayBuffer可以进行读写，Blob可读不可写
+- ArrayBuffer和Blob可以相互转换
 
+## 原型
 在javascript中，每个函数都有一个prototype属性，这个属性执行函数的原型对象
 
 ## 原型链

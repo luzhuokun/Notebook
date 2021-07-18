@@ -286,6 +286,6 @@ https://www.jianshu.com/p/75edcc05acfd
 - `闭包`
 - 无用的`定时`没有被释放
 - 避免`死循环`
-- 多余的console.log打印
+- 多余的`console.log`打印
 
 ### 垃圾回收触发后是会暂用主线程的，执行完毕再恢复执行

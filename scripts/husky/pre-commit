@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+node scripts/pre_commit/package_version_auto_add.js
+npm run lint-staged

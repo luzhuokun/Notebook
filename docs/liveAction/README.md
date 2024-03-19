@@ -227,24 +227,11 @@
     - 不适合太多个性化样式的项目，适合 CMS 后台，不适合 C 端应用
   - `shadow dom`
     - 是 web Components 中的一员，浏览器原生支持，创建一个不受外界干扰的 dom 树，样式只会有 shadow dom 里面的元素生效。但由于这种隔离特性，有些全局弹窗的场景会不太适用
-  - `iframe`
-    - 路由状态丢失
-    - dom 隔离严重
-    - 通信困难
-    - 复用困难
 
 ?>
 [基于 iframe 的全新微前端方案](https://cloud.tencent.com/developer/article/1919034)
 [手写 Css-Modules 来深入理解它的原理](https://www.51cto.com/article/707429.html)  
 [深度探索 styled-components 工作原理](https://zhuanlan.zhihu.com/p/336348713)
-
-## js 隔离方案
-
-- js 隔离主要是解决 window 覆盖、通信等问题
-- 常见的解决方式有快照、proxy、iframe 等方式
-- window `快照`和还原，只能支持单个子应用的场景
-- `proxy`，通过代理 window 的方式，可以支持多个子应用的场景
-- `iframe`，完美解决隔离问题，但是需要 postMessage 进行通信，有一定的复杂性，而且还可能存在性能问题
 
 ## 微前端方案选型
 
@@ -253,6 +240,29 @@
 - 现在市面上也有许多微前端解决方案可以选择，比如 qiankun（阿里）、micro-app（京东）、garfish（字节）、wujie（腾讯）、EMP（欢聚）等等
   - [qiankun](https://www.npmjs.com/package/qiankun)
     - 基于 `single-spa`的二次封装，single-spa 提供了`路由`以及`子应用入口`方法，qiankun 在此基础上实现了 css 隔离、js 隔离、通信以及资源预加载等功能
+  - [wujie](https://www.npmjs.com/package/wujie)
+    - 基于 `webComponent` + `iframe`
+      - 通过 shadow dom 做样式隔离
+      - js 放在 iframe 中运行，实现了子应用 window、document、location、history 的完全解耦和隔离
+      - 底层采用 proxy + Object.defineproperty 的方式对 iframe 中对 dom 操作代理挟持
+    - 优点
+      - 接入成本低，开箱即用，没有 qiankun 那么多问题要手动解决（支持 vite）
+      - 代码入侵性也少
+  - `iframe`
+    - 优点
+      - `简单易用`，无需特殊配置就能原封不动地嵌入到页面中
+      - `隔离方便`，通过 iframe 做到 css、js 和 dom 的完全隔离
+      - `多应用激活`，页面上可以摆放多个 iframe 来组合业务
+    - 缺点
+      - `dom的隔离严重`，弹窗只能在 iframe 内部展示，无法覆盖全局
+      - `通信困难`，通过 postmessage 通信（序列化、异步、兼容性）
+      - `路由状态丢失`，刷新一下，iframe 的 url 状态就丢失了（不保活）
+      - `浏览器前进后退`，iframe 会被刷新重置
+      - `没有保活机制`，子应用重新载入时要重新读取文件
+      - `白屏时间太长`，对于 SPA 应用应用来说无法接受
+      - `用户体验不好`，滚动条等外观问题要处理
+      - 不利于 `seo`
+      - `抢占下载资源`（主页面），阻塞主页面的 onload 事件，与主页面共享连接池，影响主页面资源的下载
   - [micro-app](https://www.npmjs.com/package/@micro-zoe/micro-app)
     - 基于 `webComponent`（自定义元素、shadow dom、html 模板），对于不支持 webComponent 没有降级处理
   - [emp](https://www.npmjs.com/package/@efox/emp)
@@ -260,9 +270,6 @@
     - css 隔离和 js 隔离自己通过第三方实现
     - 优点：去中心化，不需要基座
     - 缺点：对 webpack 强依赖
-  - [wujie](https://www.npmjs.com/package/wujie)
-    - 基于 `webComponent` + `iframe` （webComponent 做 css 隔离和元素隔离，iframe 做 js 隔离）
-    - 接入成本低，代码入侵性更少
   - [garfish](https://www.npmjs.com/package/garfish)
     - 基于 `shadow down` + 快照/proxy
   - 下载量
@@ -284,21 +291,23 @@
   - qiankun 在此基础上实现了 `css 隔离`、`js 隔离`、`通信`、`资源预加载`等功能
     - `css 隔离`
       - 类似 scoped（实验性）
-      - shadow dom（）
+      - shadow dom（严格模式）
+        - react17
     - `js 沙箱`
       - 通过 function 给子应用的 js 代码包了一层，代码跑在一个单独的作用域里面完成隔离
       - 然后对 window 隔离，采用了不同的方式
-        - LegacySandbox（单例代理沙箱）
-          - 单例模式直接代理了原生 window 对象，记录原生 window 对象的增删改查，当 window 对象激活时恢复 window 对象到上次即将失活时的状态，失活时恢复 window 对象到初始初始状态
-        - ProxySandbox（多实例代理沙箱）
-          - 多例模式代理了一个全新的对象，这个对象是复制的 window 对象的一部分不可配置属性，所有的更改都是基于这个 fakeWindow 对象，从而保证多个实例之间属性互不影响
-        - 快照沙箱（降级方案）
-          - 子应用加载时对 window 的属性进行记录下来，然后在子应用卸载时，将全局对象恢复到加载前的状态
+        - `LegacySandbox`（单例代理沙箱）
+          - 单例模式直接代理了原生 window 对象，记录原生 window 对象的增删改查，原理跟快照沙箱差不多，只是不用对属性进行 diff，性能相对更好一些，但是不支持多个子应用运行
+        - `ProxySandbox`（多实例代理沙箱）
+          - 给每个子应用创建 fakeWindow 对象，然后通过代码的方式，增删改都在 fakewindow 对象上做，不影响最外层的 window，从而保证多个实例之间属性互不影响
+        - `SnapshotSandbox`（快照沙箱 降级方案）
+          - 在激活子应用时，记录 window
+          - 在子应用失活时，还原 window，以及保存子应用对 window 的修改，在下一次子应用激活时添加回去
     - `通信`
       - actions（通过 initGlobalState，是一个观察者模式）
       - props
-      - storage
       - vuex/redux
+      - storage（持久化）
     - `路由`
       - 通过监听 hashchange 事件
       - 监听 popstate 事件
@@ -312,26 +321,33 @@
   - 复杂度增高，对项目代码有一定的侵入性修改
   - 部分场景的样式问题，比如弹窗的场景：弹窗挂到 body 上样式会丢失需要手动解决
 - 解决 qiankun 问题
+  - `不支持vite`
+    - 原因：vite 加载模块代码是以 import 原生语法来做的，qiankun 加载子应用的时候会包一层函数来执行，这样 import 在函数里面执行就会报错，因此不支持，需要把 import 语法变成异步导入的方式
+    - 子应用引入 vite-plugin-qiankun 插件来解决
   - `弹窗样式失效`
     - 解决方式：
-      - 把弹窗添加到子应用的根元素上，通过改写 document.body 的 appendchild 方法，不直接添加到 documen.body 上，而是添加在 shadow dom 的根节点上
-      - 直接关闭 qiankun 样式隔离，使用子应用自己的组件隔离方案，但可能会出现全局样式污染问题
-      - 行内样式
-  - `开发时热更新失效`
-    - 域名指向了基座应用，需要手动配置 web socket 的 hostname 指向子应用的域名，默认不配置会指向到主应用的域名去，导致热更新失效
+      - 改写 document.body 的 appendChild 方法， 把弹窗添加到子应用的 shadow dom 根节点上
+      - 使用 qiankun 提供的实验性 api，但会出现全局样式污染
+      - 关闭样式隔离，但是会出现全局样式污染
+      - 设置行内样式
   - `找不到子应用入口`
     - 原因
-      - 没有给 script 标签配 entry 属性
-      - body 最底的 script 标签不是入口文件，就是说没有找到那些入口方法
-      - window 上也没有子应用的代码
+      - script 标签配 entry 属性
+      - body 最底的 script 标签不是入口文件，没有找到那些入口方法
+      - window 上也没有子应用的入口代码
     - 解决方式
-      - 通过在 webpack 的 output 配置中设置 libraryTarget 为 umd，让代码执行后挂载到 window 上
+      - 通过在 webpack 的 output 配置中设置 libraryTarget 为 umd，把入口内容挂载到 window 上
     - 详细说明
       - 找不到入口的原因是在 webpack4 的时候，入口 script 会放到 body 的最底部，webpack5 默认情况下会把 script 放到 head 上并设置 defer 属性进行加载，而 qiankun 找子应用入口的兜底逻辑是从子应用的 html 最底部的 script 找入口函数，因为 webpack5 最底的 script 不是入口文件而导致找不到入口的情况，因此我们可以通过在 htmlwebpackplugin 插件上设置 inject 等于 body 属性，让入口 script 插到底部，但是不能完全保证入口文件在 body 的底部，因此我们还可以利用 qiankun 从 window 上找入口的机制，通过对 webpack 进行设置来实现，就是对 webpack 的 output 属性上的 library 设置成项目的名称，以及 libraryTarget 设置成 umd，把包打包成 umd 包，通过 umd 包加载的方式来解决问题
   - `内存泄漏`
-    - 由于父组件的更新导致子应用不断地实例化，然后又没有及时地手动销毁子应用实例，导致内存泄漏，在组件销毁时要及时地在 unmount 钩子函数里手动销毁实例
+    - 由于父组件的更新导致子应用不断地重复实例化，然后又没有及时地手动销毁子应用实例，导致内存泄漏，在组件销毁时要及时地在 unmount 钩子函数里销毁实例
   - `沙箱逃逸`
-    - 通过 window.addEventListener 来设置监听函数
+    - `window.addEventListener`，设置监听函数
+    - `window.parent`，可以在沙箱的执行上下文中通过该方法拿到外层的全局对象
+    - `原型链`，通过某个变量的原型链向上查找，从而达到篡改全局对象的目的（obj.constructor.prototype.toString）
+    - `Symbol.unscopables`，设置了 true 会对 with 进行无视，沿着作用域进行向上查找
+  - `开发时热更新失效`
+    - 域名指向了基座应用，需要手动配置 web socket 的 hostname 指向子应用的域名，默认不配置会指向到主应用的域名去，导致热更新失效
   - `资源 404`
     - 动态载入的脚本、样式、图片等地址不正确，没有指向子应用而指向了主应用
     - 在子应用入口代码处，通过 qiankun 初始化时注入的`__INJECTED_PUBLIC_PATH_BY_QIANKUN__`字段
@@ -354,25 +370,6 @@
 - 带有 entry 属性的 script
 - 以最后一个 script 作为入口
 - 在 window 上寻找入口(`window[library]`)，要微应用的 name 和 webpack 的 output.library 设为一致
-
-## 如何在项目中封装一个组件
-
-- 一般在我们的项目中把组件分成三种：公共、业务、页面组件，按不同的类型分别放入不同的目录存储
-  - 公共组件，主要放一些与业务无关，比较通用组件，比如轮播图、文件上传、excel 导入导出等等
-  - 业务组件，存放一些与业务相关但会在多个地方复用的组件方法
-  - 页面组件，页面进来时主要渲染的组件
-- 撰写使用 README.md 文件，列出功能点以及用例说明
-- 定义 props 入参、types 类型文件
-  - 在组件中定义好需要接收的参数，并对入参做差错判断，以及考虑好组件的扩展问题和性能问题
-  - 参数都通过 props 传递，组件中不要使用 context 或者第三方的库，保证组件的纯度
-- 使用工具协助开发调试
-  - storybook
-  - react-styleguidist
-  - vitepress
-  - dumi
-- 写单元测试，确保稳定性
-  - jest
-- 最后发布上线，投入使用
 
 ## 多种状态库选型
 
@@ -519,6 +516,24 @@
 
 ['一文带你全面体验八种状态管理库'](https://juejin.cn/post/7197309324275318843?searchId=2023082215440523A5C8544A78CD6351E8#heading-6)
 [React Query 原理与设计](https://juejin.cn/post/7169515109172609032#heading-6)
+
+## 如何在项目中封装一个组件
+
+- `根据功能抽象划分不同的组件`，公共组件、业务组件、页面组件，分别放入不同的文件目录进行管理
+  - 公共组件，主要放一些与业务无关，比较通用基础的组件，比如表单、列表、轮播图、文件上传、excel 导入导出等等
+  - 业务组件，存放一些与业务相关但会在多个地方复用的组件方法
+  - 页面组件，页面进来时主要渲染的组件
+- 在组件的开发中，要`定义 props 入参以及 types 类型检测`，在组件中定义好需要接收的参数，并对入参做差错判断，以及考虑好组件的扩展问题和性能问题
+- 针对公共组件的开发，可以使用工具协助开发调试
+  - react-styleguidist（我司）
+  - storybook
+  - vitepress
+  - dumi
+- 针对公共组件和业务组件`撰写使用README.md`文件，列出功能点以及用例说明，`方便协作`
+- 业务组件一般从公共组件中进行继承，页面组件又是从业务组件那继承使用，尽量地把组件复用起来，`减少冗余代码`
+- 写单元测试，确保稳定性
+  - jest
+- 最后发布上线，投入使用
 
 ## 前端优化手段
 
@@ -877,29 +892,29 @@ function.name 仅在创建时有值，当被赋值到某个对象属性下时 na
 ## 对 webpack 和 node 版本的一次升级工作
 
 - 在公司的项目中做过非常多的升级工作
-- 升级时，主要面临三个问题
+- 升级时，主要`面临三个问题`
   - 依赖包与依赖包之间不兼容的问题
   - 依赖包和 node 之间不兼容的问题
   - 还有升级后配置用法需要破坏性修改的问题
-- 面对上面的问题，主要采取了以下的解决方案
-  - 1.根据 package.json 上的 peerDependencies 属性和 engines 属性来安装指定版本依赖包
+- 面对上面的问题，主要`采取以下策略`解决
+  - 查阅官方的`升级（迁移）指南`，配合调整相关的用法和代码
+  - 使用`官方`提供的依赖包`替换`其他第三方的依赖包
+  - 以及根据每个依赖包上的 `package.json` 上的 peerDependencies 属性和 engines 属性来安装指定版本依赖包
     - 比如 node-sass，每个 node-sass 对应的 node 版本都不一样，需要安装指定的版本
-  - 2.使用官方提供的依赖包替换其他第三方的依赖包
-  - 3.废弃或替换不再维护的依赖包
-  - 4.查阅官方的升级（迁移）指南，配合调整相关的用法和代码
-    - 在 node 和 webpack 方面升级中都引入了不少的新特性
-      - node12 升 16：内部使用更高版本的 V8 引擎、使用更高版本的 OpenSSL 通信库、内部核心模块的代码优化、以及支持 esmodule 写法、支持 monorepo 项管方式等等
-      - webpack4 升 5：默认启动 tree shaking、持久化缓存、资源模块、支持模块联邦等等特性
-- 原本是打算把所有项目都升级到 webpack5，但是有部分项目有的依赖包不支持，而且没人维护了，然后我们的项目上还在大量使用着，改造的成本太高，而暂时搁置了
+  - `废弃`或替换`不再维护`的依赖包
+    - 在 node 和 webpack 方面升级中都引入了不少的`新特性`
+      - node12 升 16：内部使用更高版本的 `V8 引擎`、使用更高版本的 `OpenSSL 通信库`、内部`核心模块`的代码优化、以及`支持 esmodule` 写法、`支持 monorepo` 项管方式等等
+      - webpack4 升 5：默认启动 tree shaking、`持久化缓存`、`资源模块`、支持模块联邦等等特性
+- 原本是打算把所有项目都升级到 webpack5，但是有部分项目有的`依赖包不支持 webpack5`，而且没人维护了，然后我们的项目上还在大量使用着，`改造的成本太高`，而暂时搁置了
   - 项目上有用到一个叫 serviceworker-webpack-plugin 不维护了，并且不支持 webpack5
   - 涉及的业务场景太多，加上人力不足就暂时不做了
-- 然后还打算把 node 版本升级到 18 ，但是部署环境的系统不支持，加上 webpack4 也不支持，那就先用着 node16 了
+- 然后还打算把 node 版本升级到 18 ，但是`部署环境的系统不支持`，加上 `webpack4 也不支持 node17 版本以上`，那就先用着 node16 了
   - 部署环境上有几个系统依赖包不支持需要更新，但更新系统依赖包可能会导致系统崩溃，造成的严重后果
     - 报错 node: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28' not found (required by node)
   - webpack4 不支持高版本的 openSSL3.0（也不是不行，可以通过配置让 node 使用旧版 openssl 启动就可以）
 - 总结
   - 最后本地改好所有的 bug，要对部分涉及的功能点好单元测试，也要跟测试人员配合做好功能回归测试，做好监控，做好随时回退的准备
-  - 升级还是有很多好处的，可以提高项目的构建性能，使项目更稳定更安全，以及还能适应更多的新特性。
+  - 升级还是有很多好处的，可以`提高项目的构建性能`，使项目更稳定更安全，以及还能`适应更多的新特性`。
 
 ### 升级时遇到的其他问题
 
@@ -913,7 +928,7 @@ function.name 仅在创建时有值，当被赋值到某个对象属性下时 na
 
 - 全流程把控数据看板项目的落地，就基于 mildom 项目组的运营人员，希望可以有一个可视化数据平台来直观地看运营数据，在这样的背景下，我担任起数据看板前端项目的主要搭建工作
 - 首先从`项目立项`开始，跟各部门负责人开会，确定项目要实现的功能和目标，确定项目排期和人员分配。（沟通协调能力）
-- 然后经过技术调研和`技术选型`，选型 react+echarts+redux 状态库来进行系统搭建，通过 monorepo 来同时管理 web 端和 h5 端项目，选型好后撰`写设计文档`，`拆分功能模块`，分别拆分基础模块、公共模块、业务模块。（各种柱状图、饼状图图表展示、排行榜榜单数据）
+- 然后经过技术调研和`技术选型`，选型 react+echarts+redux 状态库来进行系统搭建，通过 monorepo 来同时管理 web 端和 h5 端项目，选型好后撰`写设计文档`，`拆分功能模块`，分别拆分基础模块、公共模块、业务模块。（各种柱状图、饼状图、曲线图等图表展示、排行榜榜单数据）
 - 分好模块后，进入开发流程，`建立 git 仓库`，根据 gitflow 流程协同开发，`制定编码规范`，通过 git 钩子在代码提交时进行检测，保证代码质量
 - 在开发的过程中
   - `引入 web-vitals` 和 sentry 收集页面性能和异常告警
@@ -976,13 +991,14 @@ function.name 仅在创建时有值，当被赋值到某个对象属性下时 na
 
 ## 部署 sentry 的一次经历
 
-- 部署
+- sentry 是一个支持私有化部署的性能异常监控平台，在使用 sentry 时，引入 sdk 会自动帮我们收集性能指标数据、异常告警数据、还可以设置不同的告警策略提示用户
+- `部署`
   - 从 git 上拉代码，然后通过 docker compose 通过单点集群的方式把整个 sentry 项目跑起来（自动创镜像）
-- 持久化缓存
+- `持久化缓存`
   - docker 有两种方式实现持久化缓存：数据卷（volumes）、绑定挂载（bind mounts）
   - 通过 docker 数据卷（volumes）将宿主机的目录挂载到容器目录中，更方便多个容器共享
   - 通过绑定挂载，可以访问宿主机任意位置，灵活但不方便移植
-- 告警策略
+- `告警策略`
   - 匹配告警等级
     - 致命错误(Critical/Fatal)
       - 系统崩溃无法运行
@@ -1005,22 +1021,22 @@ function.name 仅在创建时有值，当被赋值到某个对象属性下时 na
   - 达到一定的错误总数
   - 出错用户数达到一定量
   - 吞吐量（一段时间内接收到错误数量达到某个阀值）
-- 通知方式
+- `通知方式`
   - 邮箱
   - web hook
     - 钉钉
-- 横向对比
+- `横向对比`
   - sentry、webfunny、fundebug、frontJs、阿里 ARMS
   - sentry 支持私有化部署、告警系统、支持异常监控、性能监控
   - 主要还是成本的考虑，基本能满足需求
-- 遇到的问题
+- `遇到的问题`
   - 在项目里使用了 qiankun 微应用，然后主应用和子应用都接入了 sentry，在上报的时候无法区分项目的问题，子应用的报错也会记录到主应用中，存在上报错乱的问题
     - 记录错误的原因是：Sentry 是通过覆写 window.onerror、window.unhandledrejection 的方式初始化异常捕获逻辑。之后不管是哪个应用发生异常，都最终会触发 onerror、unhandledrejection 的 callback 而被 Sentry 感知，然后上报到 dsn 指定的项目中。而且 Sentry 的 init 代码不管是放在主应用中，还是放在子应用里面，都没有质的改变，所有被捕获的异常还是会一股脑的上报到某个项目中，无法自动区分
     - 解决方式
       - 1.子应用都不使用 sentry，全部交给主应用去上报。这样的话，主应用和子应用的所有异常都会在一起块，这样也不行
       - 2.通过 sentry 官方提供的解决方案来解决，就是设置元数据和使用 transport 自定义多路传输来解决
         - 简单理解，就是通过在编译的时候给子应用`设置元数据`（moduleMetadata）就是设置一些可以标识子应用的特征值，然后再通过 sentry 提供的 transport api，其实就是在发起请求前根据元数据来进行过滤，让子应用的错误不要在主应用的 sentry 上面去上报这样子
-- 应对日志过多磁盘不足的问题
+- `应对日志过多磁盘不足的问题`
   - 缩短日志存储时长（默认 90 天）
   - 对数据库进行手动清理（postgresql）
 

@@ -15,7 +15,7 @@
   - class component 继承 React.component，定义 render 属性，返回 jsx
   - function component 相对简单点，接收 props 返回 jsx
 - 获取状态和生命周期的方式不同，class component 通过 this，function component 通过钩子函数
-- function component 更容易做状态复用，以及避免 class component 的嵌套地狱高阶组件问题
+- function component 更容易做状态复用，class component 则通过嵌套高阶组件的方式，比较麻烦
 
 ## setState 是同步还是异步
 

@@ -31,7 +31,7 @@
 ## requestIdleCallback 和 requestAnimationFrame
 
 - `requestAnimationFrame` 在页面重绘重排前执行
-- `requestIdleCallback` 渲染完成后，浏览器有空闲时执行，有可能浏览器一直忙碌而导致该方法很晚才执行，所有可以设置 timeout 超时时间执行，尚未通过超时毫秒数调用回调，那么回调会在下一次空闲时期被强制执行
+- `requestIdleCallback` 会在渲染完成后，浏览器有空闲时执行，有可能浏览器一直忙碌而导致该方法很晚才执行，所有可以设置 timeout 超时时间，那么会在超时后的下一帧强制执行
 
 [requestIdleCallback 和 requestAnimationFrame 详解](https://www.jianshu.com/p/2771cb695c81)
 

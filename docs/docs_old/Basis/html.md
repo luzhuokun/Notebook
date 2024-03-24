@@ -105,15 +105,6 @@ form 表单是允许跨域发起请求的，因为表单递交的时候页面是
 界面加载过程中的过渡效果，在网速慢的时候显示页面的结构图比白屏的视觉效果要好  
 [Vue 项目骨架屏注入实践](https://cloud.tencent.com/developer/article/1356681)
 
-## async 和 defer
-
-- `async` 下载和执行都是异步
-- `defer` 异步下载，script 延时至元素解析完，DOMContentLoaded 回调会被延迟触发，直到 defer 加载完 script
-- `load` 都会等`async`和`defer`完成后触发（window 的 onload 事件触发会等到这两种 script 加载完再执行，如果不想等的话，可以用 preload 的异步用法来实现）
-- `async`和`defer`同时存在，会触发 async 的效果，如果不支持 async 则表现为 defer 的效果
-- 仅限外部脚步使用
-  [深入理解 script 标签的 async,defer 属性](https://blog.csdn.net/VickyTsai/article/details/102841293)
-
 ## 事件模型
 
 - 监听

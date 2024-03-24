@@ -47,24 +47,24 @@ compose(
 )(1);
 ```
 
-## [Promise](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+## 手写[Promise](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-- 异步微任务
-- 三个状态
+- 三个状态（等待中、已兑现、已拒绝）
+- resolve、reject 通过宏任务模拟微任务实现
 - 在执行 resolve/reject 时会把 then 入参的回调放入微任务队列中等待执行
 - then 每次执行会产生新的 Promise，新的 Promise 会等待上一次 Promise 执行完并状态改变后才执行
 
 ```js
-const PENDING = "pending";
-const RESOLVED = "resolved";
-const REJECTED = "rejected";
+const PENDING = "pending"; // 等待中
+const RESOLVED = "resolved"; // 已兑现
+const REJECTED = "rejected"; // 已拒绝
 class MyPromise {
   constructor(fn) {
     const self = this;
-    this._status = PENDING;
-    this._value = null;
-    this._onResolvedCallbacks = [];
-    this._onRejectedCallbacks = [];
+    this._status = PENDING; // 状态
+    this._value = null; // resolve或reject传入的值
+    this._onResolvedCallbacks = []; // 已兑现队列
+    this._onRejectedCallbacks = []; // 已拒绝队列
     function resolve(value) {
       if (value instanceof MyPromise) {
         value.then(resolve, reject);

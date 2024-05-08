@@ -1,0 +1,39 @@
+{
+  "name": "notebook",
+  "version": "1.0.92",
+  "description": "LZK BLOG",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "prepare": "husky install scripts/husky",
+    "preinstall": "npx only-allow pnpm",
+    "lint-staged": "lint-staged",
+    "exam": "node scripts/get_question.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luzhuokun/Notebook.git"
+  },
+  "author": "luzhuokun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luzhuokun/Notebook/issues"
+  },
+  "homepage": "https://github.com/luzhuokun/Notebook#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@types/node": "^18.11.18",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1",
+    "yargs": "^17.7.1"
+  },
+  "lint-staged": {
+    "*.(json|js|jsx|ts|tsx|md)": [
+      "prettier --write"
+    ]
+  }
+}
